@@ -1,0 +1,201 @@
+{% import "macros/table.html.twig" as table %}
+{% import "macros/head.html.twig" as head %}
+{% import "macros/foot.html.twig" as foot %}
+{% import "macros/breadcrumb.html.twig" as utils %}
+{% import "macros/alertes.html.twig" as alerte %}
+{% import "macros/button.html.twig" as btn %}
+{% import "macros/link.html.twig" as link %}
+{% import "macros/dataTable.html.twig" as dataTable %}
+
+
+{% extends 'admin/base.html.twig' %}
+
+{% block head %}
+{{ dataTable.css() }}
+{% endblock %}
+
+{% block foot %}
+{{ dataTable.js() }}
+{% endblock %}
+
+{% block javascripts %}
+{{ dataTable.script('#table-1') }}
+{{ dataTable.script('#table-2') }}
+{{ dataTable.script('#table-3') }}
+{% endblock %}
+
+{% block breadcrumb %}
+{{ utils.breadcrumb('Manage user',[
+{
+path:path('user_index'),
+name:'Manage Users'|trans
+}
+])}}
+{% endblock %}
+{% block title %}Users{% endblock %}
+
+{% block body %}
+{% for item in app.flashes('success') %}
+{{ alerte.alert(item,'success')}}
+{% endfor %}
+<div class="row">
+    <div class="col-12 col-sm-6 col-md-3">
+        <div class="info-box mb-3">
+            <span class="info-box-icon bg-success elevation-1"><i class="fas fa-users"></i></span>
+
+            <div class="info-box-content">
+                <span class="info-box-text">User</span>
+                <span class="info-box-number"> {{ users|length }} </span>
+            </div>
+            <!-- /.info-box-content -->
+        </div>
+        <!-- /.info-box -->
+    </div>
+    <div class="col-md-12">
+        <div class="card card-outline card-primary">
+            <div class="card-header">
+                <h4>{{'Users'|trans}}</h4>
+            </div>
+            <div class="card-body">
+                <div class="btn-group mb-3">
+                    <a class="btn btn-primary" href="{{ path('user_new') }}">Create new <i class="fa fa-plus"
+                            aria-hidden="true"></i></a>
+                </div>
+                <div class="card card-primary card-tabs">
+                    <div class="card-header p-0 pt-1">
+                        <ul class="nav nav-tabs" id="custom-tabs-one-tab" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="custom-tabs-one-home-tab" data-toggle="pill"
+                                    href="#custom-tabs-one-home" role="tab" aria-controls="custom-tabs-one-home"
+                                    aria-selected="true">Users</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="custom-tabs-one-profile-tab" data-toggle="pill"
+                                    href="#custom-tabs-one-profile" role="tab" aria-controls="custom-tabs-one-profile"
+                                    aria-selected="false">Admin</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="custom-tabs-one-messages-tab" data-toggle="pill"
+                                    href="#custom-tabs-one-messages" role="tab" aria-controls="custom-tabs-one-messages"
+                                    aria-selected="false">Editor</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="card-body">
+                        <div class="tab-content" id="custom-tabs-one-tabContent">
+                            <div class="tab-pane fade active show" id="custom-tabs-one-home" role="tabpanel"
+                                aria-labelledby="custom-tabs-one-home-tab">
+                                <table id="table-1" class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>User</th>
+                                            <th>Email</th>
+                                            <th>Is Verified</th>
+                                            <th>actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for user in users %}
+                                        {% for item in user.roles %}
+                                        {% if item == 'ROLE_USER' %}
+                                        <tr>
+                                            <td>{{ user.personne.fullName }}</td>
+                                            <td>{{ user.email }}</td>
+                                            <td>{{ user.isVerified ? 'Yes' : 'No' }}</td>
+                                            <td>
+                                                {{ link.delete(path('user_show', {'id': user.id})) }}
+                                                {{ link.edit(path('user_edit', {'id': user.id}))}}
+                                            </td>
+                                        </tr>
+                                        {% endif %}
+                                        {% endfor %}
+                                        {% else %}
+                                        <tr>
+                                            <td colspan="6">no records found</td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="tab-pane fade" id="custom-tabs-one-profile" role="tabpanel"
+                                aria-labelledby="custom-tabs-one-profile-tab">
+                                <table id="table-2" class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>User</th>
+                                            <th>Email</th>
+                                            <th>IsVerified</th>
+                                            <th>actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for user in users %}
+                                        {% for item in user.roles %}
+                                        {% if item == 'ROLE_ADMIN' %}
+                                        <tr>
+                                            <td>{{ user.personne.fullName }}</td>
+                                            <td>{{ user.email }}</td>
+                                            <td>{{ user.isVerified ? 'Yes' : 'No' }}</td>
+                                            <td>
+                                                {{ link.delete(path('user_show', {'id': user.id})) }}
+                                                {{ link.edit(path('user_edit', {'id': user.id}))}}
+                                            </td>
+                                        </tr>
+                                        {% endif %}
+                                        {% endfor %}
+                                        {% else %}
+                                        <tr>
+                                            <td colspan="6">no records found</td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="tab-pane fade" id="custom-tabs-one-messages" role="tabpanel"
+                                aria-labelledby="custom-tabs-one-messages-tab">
+                                <table id="table-3" class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>User</th>
+                                            <th>Email</th>
+                                            <th>IsVerified</th>
+                                            <th>actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for user in users %}
+                                        {% for item in user.roles %}
+                                        {% if item == 'ROLE_EDITOR' %}
+                                        <tr>
+                                            <td>{{ user.personne.fullName }}</td>
+                                            <td>{{ user.email }}</td>
+                                            <td>{{ user.isVerified ? 'Yes' : 'No' }}</td>
+                                            <td>
+                                                {{ link.delete(path('user_show', {'id': user.id})) }}
+                                                {{ link.edit(path('user_edit', {'id': user.id}))}}
+                                            </td>
+                                        </tr>
+                                        {% endif %}
+                                        {% endfor %}
+                                        {% else %}
+                                        <tr>
+                                            <td colspan="6">no records found</td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+                    </div>
+                    <!-- /.card -->
+                </div>
+            </div>
+            <div class="card-footer">
+                {{ link.back(path('admin'), 'back to dashboard') }}
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
