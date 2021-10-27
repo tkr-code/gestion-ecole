@@ -18,6 +18,9 @@ class NavExtension extends AbstractExtension
             new TwigFunction('sidebar',[$this,'getNavs'])
         ];
     }
+    public function li(){
+        
+    }
 
     public function getNavs()
     {
@@ -34,11 +37,11 @@ class NavExtension extends AbstractExtension
                     'icon'=>'fas fa-users',
                     'links'=>[
                         [
-                            'name'=>$this->translator->trans('User'),
+                            'name'=>$this->translator->trans('Users'),
                             'path'=>'user_index',
                         ],
                         [
-                            'name'=>$this->translator->trans('User'),
+                            'name'=>$this->translator->trans('New'),
                             'path'=>'user_new',
                         ],
                     ]
