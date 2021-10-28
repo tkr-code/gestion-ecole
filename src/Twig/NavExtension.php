@@ -68,7 +68,7 @@ class NavExtension extends AbstractExtension
                     'path'=>'profile_index',
                 ],
                 [
-                    'name'=>'App name',
+                    'name'=>'Gestion ecole',
                     'icon'=>'fa fa-home',
                     'links'=>
                         [

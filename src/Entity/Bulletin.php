@@ -32,6 +32,11 @@ class Bulletin
      */
     private $annee_academique;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Etudiant::class, inversedBy="bulletins")
+     */
+    private $etudiant;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -69,6 +74,18 @@ class Bulletin
     public function setAnneeAcademique(string $annee_academique): self
     {
         $this->annee_academique = $annee_academique;
+
+        return $this;
+    }
+
+    public function getEtudiant(): ?Etudiant
+    {
+        return $this->etudiant;
+    }
+
+    public function setEtudiant(?Etudiant $etudiant): self
+    {
+        $this->etudiant = $etudiant;
 
         return $this;
     }

@@ -2,7 +2,7 @@ twig:
     default_path: '%kernel.project_dir%/templates'
     form_themes: ['bootstrap_4_layout.html.twig'] # accepte plusieurs thèmes
     globals: 
-        app_name: 'Tkr app'
+        app_name: 'Gestion ecole'
         locales: '%app.locales%'
         navs: '@App\Twig\NavExtension'
         site: 

@@ -27,6 +27,11 @@ class DossierEtudiant
      */
     private $created_at;
 
+    /**
+     * @ORM\OneToOne(targetEntity=Etudiant::class, mappedBy="dossier", cascade={"persist", "remove"})
+     */
+    private $etudiant;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -52,6 +57,23 @@ class DossierEtudiant
     public function setCreatedAt(\DateTimeInterface $created_at): self
     {
         $this->created_at = $created_at;
+
+        return $this;
+    }
+
+    public function getEtudiant(): ?Etudiant
+    {
+        return $this->etudiant;
+    }
+
+    public function setEtudiant(Etudiant $etudiant): self
+    {
+        // set the owning side of the relation if necessary
+        if ($etudiant->getDossier() !== $this) {
+            $etudiant->setDossier($this);
+        }
+
+        $this->etudiant = $etudiant;
 
         return $this;
     }
