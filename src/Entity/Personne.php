@@ -46,6 +46,11 @@ class Personne
      */
     private $created_at;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Adresse::class, inversedBy="personnes")
+     */
+    private $adresse;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -107,6 +112,18 @@ class Personne
     public function setCreatedAt(\DateTimeInterface $created_at): self
     {
         $this->created_at = $created_at;
+
+        return $this;
+    }
+
+    public function getAdresse(): ?Adresse
+    {
+        return $this->adresse;
+    }
+
+    public function setAdresse(?Adresse $adresse): self
+    {
+        $this->adresse = $adresse;
 
         return $this;
     }

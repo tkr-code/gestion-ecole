@@ -39,9 +39,27 @@ class Filiere
      */
     private $etudiants;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Departement::class, inversedBy="filiere")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $departement;
+
+    /**
+     * @ORM\OneToMany(targetEntity=OptionFiliere::class, mappedBy="filiere")
+     */
+    private $options;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Classe::class, mappedBy="filiere")
+     */
+    private $classes;
+
     public function __construct()
     {
         $this->etudiants = new ArrayCollection();
+        $this->options = new ArrayCollection();
+        $this->classes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -109,6 +127,78 @@ class Filiere
             // set the owning side to null (unless already changed)
             if ($etudiant->getFiliere() === $this) {
                 $etudiant->setFiliere(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getDepartement(): ?Departement
+    {
+        return $this->departement;
+    }
+
+    public function setDepartement(?Departement $departement): self
+    {
+        $this->departement = $departement;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|OptionFiliere[]
+     */
+    public function getOptions(): Collection
+    {
+        return $this->options;
+    }
+
+    public function addOption(OptionFiliere $option): self
+    {
+        if (!$this->options->contains($option)) {
+            $this->options[] = $option;
+            $option->setFiliere($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOption(OptionFiliere $option): self
+    {
+        if ($this->options->removeElement($option)) {
+            // set the owning side to null (unless already changed)
+            if ($option->getFiliere() === $this) {
+                $option->setFiliere(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Classe[]
+     */
+    public function getClasses(): Collection
+    {
+        return $this->classes;
+    }
+
+    public function addClass(Classe $class): self
+    {
+        if (!$this->classes->contains($class)) {
+            $this->classes[] = $class;
+            $class->setFiliere($this);
+        }
+
+        return $this;
+    }
+
+    public function removeClass(Classe $class): self
+    {
+        if ($this->classes->removeElement($class)) {
+            // set the owning side to null (unless already changed)
+            if ($class->getFiliere() === $this) {
+                $class->setFiliere(null);
             }
         }
 

@@ -32,6 +32,11 @@ class OptionFiliere
      */
     private $created_at;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Filiere::class, inversedBy="options")
+     */
+    private $filiere;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -69,6 +74,18 @@ class OptionFiliere
     public function setCreatedAt(\DateTimeInterface $created_at): self
     {
         $this->created_at = $created_at;
+
+        return $this;
+    }
+
+    public function getFiliere(): ?Filiere
+    {
+        return $this->filiere;
+    }
+
+    public function setFiliere(?Filiere $filiere): self
+    {
+        $this->filiere = $filiere;
 
         return $this;
     }

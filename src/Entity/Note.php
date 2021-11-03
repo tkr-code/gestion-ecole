@@ -38,6 +38,17 @@ class Note
      */
     private $etudiant;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Matiere::class)
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $matiere;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Bulletin::class, inversedBy="notes")
+     */
+    private $bulletin;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -87,6 +98,30 @@ class Note
     public function setEtudiant(?Etudiant $etudiant): self
     {
         $this->etudiant = $etudiant;
+
+        return $this;
+    }
+
+    public function getMatiere(): ?Matiere
+    {
+        return $this->matiere;
+    }
+
+    public function setMatiere(?Matiere $matiere): self
+    {
+        $this->matiere = $matiere;
+
+        return $this;
+    }
+
+    public function getBulletin(): ?Bulletin
+    {
+        return $this->bulletin;
+    }
+
+    public function setBulletin(?Bulletin $bulletin): self
+    {
+        $this->bulletin = $bulletin;
 
         return $this;
     }

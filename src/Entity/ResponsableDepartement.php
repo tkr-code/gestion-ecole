@@ -27,6 +27,12 @@ class ResponsableDepartement
      */
     private $date_sortie_fonction;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Departement::class, inversedBy="reponsable")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $departement;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -52,6 +58,18 @@ class ResponsableDepartement
     public function setDateSortieFonction(?\DateTimeInterface $date_sortie_fonction): self
     {
         $this->date_sortie_fonction = $date_sortie_fonction;
+
+        return $this;
+    }
+
+    public function getDepartement(): ?Departement
+    {
+        return $this->departement;
+    }
+
+    public function setDepartement(?Departement $departement): self
+    {
+        $this->departement = $departement;
 
         return $this;
     }

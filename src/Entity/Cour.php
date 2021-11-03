@@ -39,9 +39,21 @@ class Cour
      */
     private $etudiants;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Classe::class, mappedBy="cours")
+     */
+    private $classes;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Professeur::class, inversedBy="cours")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $professeur;
+
     public function __construct()
     {
         $this->etudiants = new ArrayCollection();
+        $this->classes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -108,6 +120,48 @@ class Cour
         if ($this->etudiants->removeElement($etudiant)) {
             $etudiant->removeFicheDePresence($this);
         }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Classe[]
+     */
+    public function getClasses(): Collection
+    {
+        return $this->classes;
+    }
+
+    public function addClass(Classe $class): self
+    {
+        if (!$this->classes->contains($class)) {
+            $this->classes[] = $class;
+            $class->setCours($this);
+        }
+
+        return $this;
+    }
+
+    public function removeClass(Classe $class): self
+    {
+        if ($this->classes->removeElement($class)) {
+            // set the owning side to null (unless already changed)
+            if ($class->getCours() === $this) {
+                $class->setCours(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getProfesseur(): ?Professeur
+    {
+        return $this->professeur;
+    }
+
+    public function setProfesseur(?Professeur $professeur): self
+    {
+        $this->professeur = $professeur;
 
         return $this;
     }

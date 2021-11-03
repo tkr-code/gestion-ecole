@@ -22,6 +22,12 @@ class PersonneAJoindre
      */
     private $lien;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Personne::class)
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $personne;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -35,6 +41,18 @@ class PersonneAJoindre
     public function setLien(string $lien): self
     {
         $this->lien = $lien;
+
+        return $this;
+    }
+
+    public function getPersonne(): ?Personne
+    {
+        return $this->personne;
+    }
+
+    public function setPersonne(?Personne $personne): self
+    {
+        $this->personne = $personne;
 
         return $this;
     }

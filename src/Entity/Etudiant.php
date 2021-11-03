@@ -75,15 +75,16 @@ class Etudiant
     private $notes;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Cour::class, inversedBy="etudiants")
+     * @ORM\OneToMany(targetEntity=EtudiantCour::class, mappedBy="etudiants")
      */
-    private $fiche_de_presence;
+    private $etudiantCours;
+
 
     public function __construct()
     {
         $this->bulletins = new ArrayCollection();
         $this->notes = new ArrayCollection();
-        $this->fiche_de_presence = new ArrayCollection();
+        $this->etudiantCours = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -248,26 +249,33 @@ class Etudiant
     }
 
     /**
-     * @return Collection|Cour[]
+     * @return Collection|EtudiantCour[]
      */
-    public function getFicheDePresence(): Collection
+    public function getEtudiantCours(): Collection
     {
-        return $this->fiche_de_presence;
+        return $this->etudiantCours;
     }
 
-    public function addFicheDePresence(Cour $ficheDePresence): self
+    public function addEtudiantCour(EtudiantCour $etudiantCour): self
     {
-        if (!$this->fiche_de_presence->contains($ficheDePresence)) {
-            $this->fiche_de_presence[] = $ficheDePresence;
+        if (!$this->etudiantCours->contains($etudiantCour)) {
+            $this->etudiantCours[] = $etudiantCour;
+            $etudiantCour->setEtudiants($this);
         }
 
         return $this;
     }
 
-    public function removeFicheDePresence(Cour $ficheDePresence): self
+    public function removeEtudiantCour(EtudiantCour $etudiantCour): self
     {
-        $this->fiche_de_presence->removeElement($ficheDePresence);
+        if ($this->etudiantCours->removeElement($etudiantCour)) {
+            // set the owning side to null (unless already changed)
+            if ($etudiantCour->getEtudiants() === $this) {
+                $etudiantCour->setEtudiants(null);
+            }
+        }
 
         return $this;
     }
+
 }

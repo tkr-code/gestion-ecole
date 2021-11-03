@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ClasseRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -26,6 +28,16 @@ class Classe
      * @ORM\Column(type="string", length=255)
      */
     private $salle;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Filiere::class, inversedBy="classes")
+     */
+    private $filiere;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Cour::class, inversedBy="classes")
+     */
+    private $cours;
 
     public function getId(): ?int
     {
@@ -52,6 +64,30 @@ class Classe
     public function setSalle(string $salle): self
     {
         $this->salle = $salle;
+
+        return $this;
+    }
+
+    public function getFiliere(): ?Filiere
+    {
+        return $this->filiere;
+    }
+
+    public function setFiliere(?Filiere $filiere): self
+    {
+        $this->filiere = $filiere;
+
+        return $this;
+    }
+
+    public function getCours(): ?Cour
+    {
+        return $this->cours;
+    }
+
+    public function setCours(?Cour $cours): self
+    {
+        $this->cours = $cours;
 
         return $this;
     }
