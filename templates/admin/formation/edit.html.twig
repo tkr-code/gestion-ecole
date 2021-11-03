@@ -1,0 +1,17 @@
+{% extends 'admin/base.html.twig' %}
+{% import "macros/link.html.twig" as link %}
+{% block title %}Edit Formation{% endblock %}
+
+{% block body %}
+<div class="card">
+    <div class="card-header">
+        <h3>Edit Formation</h3>
+    </div>
+    <div class="card-body">
+        {{ include('admin/formation/_form.html.twig', {'button_label': 'Update'}) }}
+    
+    {{ link.back(path('admin_formation_index')) }}
+
+    </div>
+</div>
+{% endblock %}

@@ -33,6 +33,20 @@ class NavExtension extends AbstractExtension
             'admin'=>
             [
                 [
+                    'name'=>'Formation',
+                    'icon'=>'fas fa-home',
+                    'links'=>[
+                        [
+                            'name'=>'Formations',
+                            'path'=>'admin_formation_index'
+                        ],
+                        [
+                            'name'=>'New',
+                            'path'=>'admin_formation_new'
+                        ]
+                    ]
+                ],
+                [
                     'name'=>'user',
                     'icon'=>'fas fa-users',
                     'links'=>[
