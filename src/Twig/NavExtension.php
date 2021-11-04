@@ -47,6 +47,20 @@ class NavExtension extends AbstractExtension
                     ]
                 ],
                 [
+                    "name"=>'Matiere',
+                    "icon"=>'fas fa-book',
+                    'links'=>[
+                        [
+                            'name'=>'Matieres',
+                            'path'=>'admin_matiere_index'
+                        ],
+                        [
+                            'name'=>'New',
+                            'path'=>'admin_matiere_new'
+                        ]
+                    ]
+                ],
+                [
                     'name'=>'user',
                     'icon'=>'fas fa-users',
                     'links'=>[

@@ -1,7 +1,8 @@
 {% import "macros/button.html.twig" as button %}
+
 {{ form_start(form) }}
     {{ form_widget(form) }}
-    {{button.add()}}
-    {#    <button class="btn btn-primary d-inline-block">{{ button_label|default('Save') }}</button>
+    {{button.add('save')}}
+    {#    <button class="btn">{{ button_label|default('Save') }}</button>
 #}
 {{ form_end(form) }}
