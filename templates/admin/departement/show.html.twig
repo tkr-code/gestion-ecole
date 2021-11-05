@@ -14,46 +14,49 @@
 	{{dataTable.script("#table-1")}}
 {% endblock %}
 
-{% block title %}Matiere
+{% block title %}Departement
 {% endblock %}
 
 {% block body %}
 	<div class="card card-outline card-lightblue">
 		<div class="card-header">
-			<h3>Matiere</h3>
+			<h3>Departement</h3>
 		</div>
+
 		<div class="card-body">
+
 			<table class="table" id="table-1">
 				<tbody>
 					<tr>
 						<th>Id</th>
-						<td>{{ matiere.id }}</td>
+						<td>{{ departement.id }}</td>
 					</tr>
 					<tr>
 						<th>Code</th>
-						<td>{{ matiere.code }}</td>
+						<td>{{ departement.code }}</td>
 					</tr>
 					<tr>
 						<th>Designation</th>
-						<td>{{ matiere.designation }}</td>
+						<td>{{ departement.designation }}</td>
 					</tr>
 					<tr>
 						<th>Créé le</th>
 						<td>
-							{{ matiere.createdAt ? matiere.createdAt|date_format_fr: '' }}
+							{{ departement.createdAt ? departement.createdAt|date_format_fr : '' }}
 							à
-							{{ matiere.createdAt ? matiere.createdAt|date('H:i:s') : '' }}
+							{{ departement.createdAt ? departement.createdAt|date('H:i:s') : '' }}
 						</td>
 					</tr>
 				</tbody>
 			</table>
 		</div>
 	</div>
-	{#	<a href="{{ path('admin_matiere_index') }}">back to list</a>
-			#}
-	{{link.back(path('admin_matiere_index'))}}
-	<a href="{{ path('admin_matiere_edit', {'id': matiere.id}) }}" class="btn btn-success">
+
+	{#	<a href="{{ path('admin_departement_index') }}">back to list</a>
+		#}
+	{{link.back(path('admin_departement_index'))}}
+	<a href="{{ path('admin_departement_edit', {'id': departement.id}) }}" class="btn btn-success">
 		<i class="fas fa-edit"></i>&nbsp;edit</a>
 
-	{{ include('admin/matiere/_delete_form.html.twig') }}
+	{{ include('admin/departement/_delete_form.html.twig') }}
 {% endblock %}

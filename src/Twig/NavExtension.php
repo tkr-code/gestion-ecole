@@ -61,6 +61,20 @@ class NavExtension extends AbstractExtension
                     ]
                 ],
                 [
+                    'name'=>'Departement',
+                    'icon'=>'fas fa-home',
+                    'links'=>[
+                        [
+                            'name'=>'Departements',
+                            'path'=>'admin_departement_index'
+                        ],
+                        [
+                            'name'=>'New',
+                            'path'=>'admin_departement_new'
+                        ]
+                    ]
+                ],
+                [
                     'name'=>'user',
                     'icon'=>'fas fa-users',
                     'links'=>[

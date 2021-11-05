@@ -46,7 +46,7 @@ Matieres
                     <td>{{ matiere.id }}</td>
                     <td>{{ matiere.code }}</td>
                     <td>{{ matiere.designation }}</td>
-                    <td>{{ matiere.createdAt ? matiere.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                    <td>{{ matiere.createdAt ? matiere.createdAt|date_format_fr : '' }}</td>
                     <td>
                         <a href="{{ path('admin_matiere_show', {'id': matiere.id}) }}">show</a>
                         <a href="{{ path('admin_matiere_edit', {'id': matiere.id}) }}">edit</a>

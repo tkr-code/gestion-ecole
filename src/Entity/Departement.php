@@ -48,6 +48,7 @@ class Departement
     {
         $this->reponsable = new ArrayCollection();
         $this->filiere = new ArrayCollection();
+        $this->created_at = new \DateTime();
     }
 
     public function getId(): ?int
