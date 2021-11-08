@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\OptionFiliereRepository;
+use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -19,11 +20,15 @@ class OptionFiliere
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="this field could not be empty")
+     * @Assert\NotNull
      */
     private $code;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="this field could not be empty")
+     * @Assert\NotNull
      */
     private $designation;
 

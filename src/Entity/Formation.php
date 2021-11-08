@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\FormationRepository;
+use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -21,11 +22,16 @@ class Formation
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="this field could not be empty")
+     * @Assert\NotNull
      */
     private $designation;
 
     /**
      * @ORM\Column(type="float")
+     * @Assert\NotBlank(message="this field could not be empty")
+     * @Assert\NotNull
+     * @Assert\Positive
      */
     private $cout;
 

@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\ResponsableDepartementRepository;
+use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -19,6 +20,8 @@ class ResponsableDepartement
 
     /**
      * @ORM\Column(type="datetime")
+     * @Assert\NotBlank(message="this field could not be empty")
+     * @Assert\NotNull
      */
     private $date_entre_fonction;
 

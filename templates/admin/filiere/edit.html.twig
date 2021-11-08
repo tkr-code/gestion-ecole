@@ -1,30 +1,26 @@
 {% extends 'admin/base.html.twig' %}
-{% import "macros/button.html.twig" as buttons %}
-{% import "macros/link.html.twig" as links %}
-
+{% import "macros/button.html.twig" as button %}
+{% import "macros/link.html.twig" as link %}
 
 {% block title %}
-	Edit Matiere
+	Edit Filiere
 {% endblock %}
 
 {% block body %}
 	<div class="card card-outline card-success">
 		<div class="card-header">
-			<h3>Edit Matiere</h3>
+			<h3>Edit Filiere</h3>
 		</div>
 		<div class="card-body">
 			{{form_start(form)}}
 			{{form_row(form.code)}}
 			{{form_row(form.designation)}}
-
+			{{form_row(form.departement)}}
 			<div class="btn-group">
-				{{links.back(path('admin_matiere_index'))}}
-				{{buttons.edit()}}
+				{{link.back(path('admin_filiere_index'))}}
+				{{button.edit()}}
 			</div>
 			{{form_end(form)}}
-
 		</div>
 	</div>
-	{#	<a href="{{ path('admin_matiere_index') }}">back to list</a>
-		#}
 {% endblock %}

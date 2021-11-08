@@ -14,9 +14,28 @@ class FormationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('designation',TextType::class)
-            ->add('cout',NumberType::class)
-        ;
+            ->add(
+                'designation',
+                TextType::class,
+                [
+                    'attr' =>
+                    [
+                        'placeholder' => 'Designation',
+                        'class'=>'text-capitalize'
+                    ]
+                ]
+
+            )
+            ->add(
+                'cout',
+                NumberType::class,
+                [
+                    'attr' =>
+                    [
+                        'placeholder' => 'Cout de la formation'
+                    ],
+                ]
+            );
     }
 
     public function configureOptions(OptionsResolver $resolver): void
