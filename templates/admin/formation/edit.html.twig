@@ -1,5 +1,4 @@
 {% extends 'admin/base.html.twig' %}
-{% import "macros/link.html.twig" as link %}
 {% block title %}Edit Formation{% endblock %}
 
 {% block body %}
@@ -9,9 +8,6 @@
     </div>
     <div class="card-body">
         {{ include('admin/formation/_form.html.twig', {'button_label': 'Update'}) }}
-    
-    {{ link.back(path('admin_formation_index')) }}
-
     </div>
 </div>
 {% endblock %}

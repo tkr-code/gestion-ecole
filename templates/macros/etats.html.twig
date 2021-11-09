@@ -1,0 +1,7 @@
+{% macro etat(etat) %}
+    {% if etat == 'Activer' %}
+        <span class="badge badge-success">Activer</span>
+        {% elseif etat == 'Désactiver' %}
+        <span class="badge badge-warning">Désactiver</span>
+    {% endif %}
+{% endmacro %}

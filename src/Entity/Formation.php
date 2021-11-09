@@ -6,12 +6,21 @@ use App\Repository\FormationRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass=FormationRepository::class)
+ * @UniqueEntity(fields={"designation"})
  */
 class Formation
 {
+    const etats =
+    [
+        'Activer'=>'Activer',
+        'Désactiver'=>'Désactiver',
+        'Supprimer'=>'Supprimer'
+    ];
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -20,11 +29,13 @@ class Formation
     private $id;
 
     /**
+     * @Assert\NotNull
      * @ORM\Column(type="string", length=255)
      */
     private $designation;
 
     /**
+     * @Assert\NotNull
      * @ORM\Column(type="float")
      */
     private $cout;
@@ -38,6 +49,11 @@ class Formation
      * @ORM\OneToMany(targetEntity=Etudiant::class, mappedBy="formation")
      */
     private $etudiants;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $etat;
 
     public function __construct()
     {
@@ -112,6 +128,18 @@ class Formation
                 $etudiant->setFormation(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getEtat(): ?string
+    {
+        return $this->etat;
+    }
+
+    public function setEtat(string $etat): self
+    {
+        $this->etat = $etat;
 
         return $this;
     }

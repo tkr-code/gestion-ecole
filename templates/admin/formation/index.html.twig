@@ -1,6 +1,8 @@
-{% import "macros/dataTable.html.twig" as dataTable %}
 {% extends 'admin/base.html.twig' %}
-
+{% import "macros/dataTable.html.twig" as dataTable %}
+{% import "macros/links.html.twig" as links %}
+{% import "macros/alertes.html.twig" as alertes %}
+{% import "macros/etats.html.twig" as etats %}
 {% block title %}Formations{% endblock %}
 
 {% block head %}
@@ -16,6 +18,9 @@
 {% endblock %}
 
 {% block body %}
+{% for item in app.flashes('success') %}
+    {{ alertes.alert(item,'success')}}
+{% endfor %}
 <div class="card card-outline card-primary">
     <div class="card-header">
         <h3>Formations</h3>
@@ -29,23 +34,25 @@
         <table id="table-1" class="table">
             <thead>
                 <tr>
-                    <th>Id</th>
-                    <th>Designation</th>
+                    <th>Désignation</th>
                     <th>Cout</th>
                     <th>Créé le</th>
+                    <th>Etat</th>
                     <th>actions</th>
                 </tr>
             </thead>
             <tbody>
                 {% for formation in formations %}
                 <tr>
-                    <td>{{ formation.id }}</td>
                     <td>{{ formation.designation }}</td>
-                    <td>{{ formation.cout }}</td>
-                    <td>{{ formation.createdAt ? formation.createdAt|date_format_fr : '' }}</td>
+                    <td>{{ formation.cout|number_format(2,'.',' ') ~ ' ' ~ site.current }} </td>
+                    <td>{{ formation.createdAt ? formation.createdAt|date_format_fr|capitalize : '' }}</td>
+                    <td>{{ etats.etat(formation.etat) }}</td>
                     <td>
-                        <a href="{{ path('admin_formation_show', {'id': formation.id}) }}">show</a>
-                        <a href="{{ path('admin_formation_edit', {'id': formation.id}) }}">edit</a>
+                        <div class="btn-group">
+                            {{ links.show(path('admin_formation_show', {'id': formation.id}))}}
+                            {{ links.edit(path('admin_formation_edit', {'id': formation.id}))}}
+                        </div>
                     </td>
                 </tr>
                 {% else %}

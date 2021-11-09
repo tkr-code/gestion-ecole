@@ -1,4 +1,8 @@
+{% import "macros/links.html.twig" as links %}
 {{ form_start(form) }}
     {{ form_widget(form) }}
-    <button class="btn btn-primary d-inline-block">{{ button_label|default('Save') }}</button>
+    <div class="btn-group">
+        {{ links.back(path('admin_formation_index')) }}
+        <button class="btn btn-primary d-inline-block">{{ button_label|default('Save') }}</button>
+    </div>
 {{ form_end(form) }}

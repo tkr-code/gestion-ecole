@@ -15,6 +15,7 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class FormationController extends AbstractController
 {
+    private $parent_page = 'Formation';
     /**
      * @Route("/", name="admin_formation_index", methods={"GET"})
      */
@@ -22,6 +23,7 @@ class FormationController extends AbstractController
     {
         return $this->render('admin/formation/index.html.twig', [
             'formations' => $formationRepository->findAll(),
+            'parent_page'=>$this->parent_page
         ]);
     }
 
@@ -38,6 +40,7 @@ class FormationController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($formation);
             $entityManager->flush();
+            $this->addFlash('success','Nouvelle formation enrgistrée');
 
             return $this->redirectToRoute('admin_formation_index', [], Response::HTTP_SEE_OTHER);
         }
@@ -45,6 +48,7 @@ class FormationController extends AbstractController
         return $this->renderForm('admin/formation/new.html.twig', [
             'formation' => $formation,
             'form' => $form,
+            'parent_page'=>$this->parent_page
         ]);
     }
 
@@ -55,6 +59,7 @@ class FormationController extends AbstractController
     {
         return $this->render('admin/formation/show.html.twig', [
             'formation' => $formation,
+            'parent_page'=>$this->parent_page
         ]);
     }
 
@@ -68,13 +73,14 @@ class FormationController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
-
+            $this->addFlash('success','Formation modifiée');
             return $this->redirectToRoute('admin_formation_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('admin/formation/edit.html.twig', [
             'formation' => $formation,
             'form' => $form,
+            'parent_page'=>$this->parent_page
         ]);
     }
 

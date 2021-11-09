@@ -1,6 +1,15 @@
 {% extends 'admin/base.html.twig' %}
-{% import "macros/link.html.twig" as link %}
+{% import "macros/breadcrumb.html.twig" as breadcrumb %}
 {% block title %}New Formation{% endblock %}
+
+{% block breadcrumb %}
+    {{ breadcrumb.breadcrumb('New formation',[
+        {
+            name:'Manage formation',
+            path:path('admin_formation_index')
+        }
+    ]) }}
+{% endblock %}
 
 {% block body %}
 <div class="card card-outline card-dark">
@@ -9,8 +18,6 @@
     </div>
     <div class="card-body">
         {{ include('admin/formation/_form.html.twig') }}
-        {{ link.back(path('admin_formation_index')) }}
-        {# <a href="{{ path('admin_formation_index') }}">back to list</a> #}
     </div>
 </div>
 {% endblock %}
