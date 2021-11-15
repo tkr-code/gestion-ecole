@@ -1,0 +1,57 @@
+{% extends 'admin/base.html.twig' %}
+{% import "macros/dataTable.html.twig" as dataTable %}
+{% import "macros/link.html.twig" as links %}
+
+{% block head %}
+	{{dataTable.css()}}
+{% endblock %}
+
+{% block foot %}
+	{{dataTable.js()}}
+{% endblock %}
+
+{% block javascripts %}
+	{{dataTable.script("#table-1")}}
+{% endblock %}
+
+{% block title %}Matiere
+{% endblock %}
+
+{% block body %}
+	<div class="card card-outline card-lightblue">
+		<div class="card-header">
+			<h3>Matiere</h3>
+		</div>
+		<div class="card-body">
+			<table class="table" id="table-1">
+				<tbody>
+					<tr>
+						<th>Id</th>
+						<td>{{ matiere.id }}</td>
+					</tr>
+					<tr>
+						<th>Code</th>
+						<td>{{ matiere.code }}</td>
+					</tr>
+					<tr>
+						<th>Designation</th>
+						<td>{{ matiere.designation }}</td>
+					</tr>
+					<tr>
+						<th>Créé le</th>
+						<td>
+							{{ matiere.createdAt ? matiere.createdAt|date_format_fr: '' }}
+							à
+							{{ matiere.createdAt ? matiere.createdAt|date('H:i:s') : '' }}
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	{#	<a href="{{ path('admin_matiere_index') }}">back to list</a>
+				#}
+	{{links.back(path('admin_matiere_index'))}}
+	<a href="{{ path('admin_matiere_edit', {'id': matiere.id}) }}" class="btn btn-success">
+		<i class="fas fa-edit"></i>&nbsp;edit</a>
+{% endblock %}

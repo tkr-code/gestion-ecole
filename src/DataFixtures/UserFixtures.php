@@ -13,11 +13,13 @@ class UserFixtures extends Fixture
 {
     private $em;
     private $passwordEncoder;
+
     public function __construct(EntityManagerInterface $entityManagerInterface, UserPasswordHasherInterface $userPasswordHasherInterface)
     {
         $this->em = $entityManagerInterface;
         $this->passwordEncoder = $userPasswordHasherInterface;
     }
+    
     public function load(ObjectManager $manager)
     {
         $users = array(
@@ -28,19 +30,27 @@ class UserFixtures extends Fixture
         array('first_name' => 'Pepin','last_name' => 'Ngoulou','email' => 'user@mail.com',
                 'roles' => ["ROLE_USER"]),
         );
+
         foreach ($users as $value) {
             $user = new User();
             $personne = new Personne();
+
             $personne->setPrenom($value['first_name'])
-            ->setNom($value['last_name']);
-            $user->setEmail($value['email']);
-            $user->setIsVerified(true)
-            ->setEtat('Activer');
-            $user->setPassword($this->passwordEncoder->hashPassword($user,'password'))
-            ->setRoles($value['roles'])
-            ->setPersonne($personne);
+                     ->setNom($value['last_name']);
+            
+            $this->em->persist($personne);
+
+
+            $user->setEmail($value['email'])
+                 ->setIsVerified(true)
+                 ->setPassword($this->passwordEncoder->hashPassword($user,'password'))
+                 ->setRoles($value['roles'])
+                 ->setPersonne($personne);
+
             $this->em->persist($user);
+
+            $this->em->flush();
+
         }
-        $this->em->flush();
     }
 }

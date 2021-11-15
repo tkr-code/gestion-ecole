@@ -31,12 +31,17 @@ class Formation
     /**
      * @Assert\NotNull
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="this field could not be empty")
+     * @Assert\NotNull
      */
     private $designation;
 
     /**
      * @Assert\NotNull
      * @ORM\Column(type="float")
+     * @Assert\NotBlank(message="this field could not be empty")
+     * @Assert\NotNull
+     * @Assert\Positive
      */
     private $cout;
 

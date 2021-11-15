@@ -1,4 +1,5 @@
-<?php 
+<?php
+
 namespace App\Twig;
 
 use Twig\Extension\AbstractExtension;
@@ -12,14 +13,14 @@ class NavExtension extends AbstractExtension
     {
         $this->translator = $translator;
     }
-    public function getFunctions():array
+    public function getFunctions(): array
     {
-        return[
-            new TwigFunction('sidebar',[$this,'getNavs'])
+        return [
+            new TwigFunction('sidebar', [$this, 'getNavs'])
         ];
     }
-    public function li(){
-        
+    public function li()
+    {
     }
 
     public function getNavs()
@@ -73,46 +74,75 @@ class NavExtension extends AbstractExtension
             'admin'=>
             [
                 [
-                    'name'=>'Formation',
-                    'links'=>[
+                    'name' => 'Formation',
+                    'links' => 
+                    [
                         [
-                            'name'=>'Formations',
-                            'path'=>'admin_formation_index'
-                        ],
+                                'name' => 'Formations',
+                                'path' => 'admin_formation_index'
+                            ],
+                            [
+                                'name' => 'New',
+                                'path' => 'admin_formation_new'
+                            ]
+                        ]
+                    ],
+                    [
+                        "name" => 'Matiere',
+                        'links' => [
+                            [
+                                'name' => 'Matieres',
+                                'path' => 'admin_matiere_index'
+                            ],
+                            [
+                                'name' => 'New',
+                                'path' => 'admin_matiere_new'
+                            ]
+                        ]
+                    ],
+                    [
+                        'name' => 'Departement',
+                        'links' => [
+                            [
+                                'name' => 'Departements',
+                                'path' => 'admin_departement_index'
+                            ],
+                            [
+                                'name' => 'New',
+                                'path' => 'admin_departement_new'
+                            ]
+                        ]
+                    ],
+                    [
+                        'name' => 'Filiere',
+                        'icon' => '',
+                        'links' =>
                         [
-                            'name'=>'New',
-                            'path'=>'admin_formation_new'
+                            [
+                                'name' => 'Filieres',
+                                'path' => 'admin_filiere_index'
+                            ],
+                            [
+                                'name' => 'New',
+                                'path' => 'admin_filiere_new'
+                            ]
+                        ]
+                    ],
+                    [
+                        'name' => 'user',
+                        'icon' => 'fas fa-users',
+                        'links' => [
+                            [
+                                'name' => $this->translator->trans('Users'),
+                                'path' => 'user_index',
+                            ],
+                            [
+                                'name' => $this->translator->trans('New'),
+                                'path' => 'user_new',
+                            ],
                         ]
                     ]
-                ],
-                [
-                    'name'=>'Classe',
-                    'links'=>[
-                        [
-                            'name'=>'Classes',
-                            'path'=>'admin_classe_index'
-                        ],
-                        [
-                            'name'=>'New',
-                            'path'=>'admin_classe_new'
-                        ]
-                    ]
-                ],
-                [
-                    'name'=>'User',
-                    'icon'=>'fas fa-users',
-                    'links'=>[
-                        [
-                            'name'=>$this->translator->trans('Users'),
-                            'path'=>'user_index',
-                        ],
-                        [
-                            'name'=>$this->translator->trans('New User'),
-                            'path'=>'user_new',
-                        ],
-                    ]
-                ]
-            ],
+            ]
         ];
     }
 }

@@ -1,0 +1,122 @@
+{% extends 'admin/base.html.twig' %}
+{% import "macros/buttons.html.twig" as buttons %}
+{% import "macros/links.html.twig" as link %}
+{% block title %}
+    New Filiere 
+{% endblock %}
+{% block body %}
+    <div class="card card-outline card-dark">
+        <div class="card-header">
+            <h3>
+                Create new Filiere      
+            </h3>
+        </div>
+        <div class="card-body">
+            {# {{ include('admin/filiere/_form.html.twig') }} #}
+            {{ form_start(form) }}
+            <div class="row">
+                <div class="col-lg-5">
+                    {{ form_row(form.departement) }}
+                    {{ form_row(form.code) }}
+                    {{ form_row(form.designation) }}
+                </div>
+                <div class="col-md-1"></div>
+                <div class="col-lg-6">
+                    <h3>
+                        Ajouter une Option ?               
+                    </h3>
+                    {{ form_row(form.Options) }}
+                    <div id="show_table_option">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th scope="col">
+                                        #
+                                                                        
+                                    </th>
+                                    <th scope="col">
+                                        Code Option
+                                                                        
+                                    </th>
+                                    <th scope="col">
+                                        Designation
+                                                                        
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody id="affiche_option_filiere"></tbody>
+                        </table>
+                        <div class="row">
+                            <div class="col-md-4"></div>
+                            <div class="col-md-4">
+                                <a href="#" class="btn btn-success " id="add">
+                                    +
+                                                                
+                                </a>
+                                <a href="#" class="btn btn-danger " id="remove">
+                                    -
+                                                                
+                                </a>
+                            </div>
+                            <div class="col-md-4 "></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4"></div>
+                <div class="col-md-4 mb-3">
+                    {{ buttons.add() }}
+                </div>
+                <div class="col-md-4"></div>
+            </div>
+
+        {{ form_end(form) }}
+        </div>
+
+    </div>
+{% endblock %}
+{% block javascripts %}<script>
+    $(document).ready(function() {
+        addOptionFiliere();
+
+        $("#add").click(function() {
+            addOptionFiliere();
+        })
+
+        $("#remove").click(function() {
+            $("#affiche_option_filiere").children("tr:last").remove();
+        })
+
+        function addOptionFiliere() {
+            $.ajax({
+                url: "{{ path('admin_filiere_new') }} ",
+                method: "POST",
+                dataType: "JSON",
+                data: {
+                    optionFiliere: 1
+                },
+                success: function(data) {
+                    $("#affiche_option_filiere ").append(data);
+                    let n = 0;
+                    $(".num").each(function() {
+                        $(this).html(++n);
+                    });
+                }
+
+            })
+        }
+        //by default we hide table allow to add option in a filiere
+        $("#show_table_option").hide();
+
+        //show option if there is no option in a filiere
+        $("#filiere_option_Options_0").click(function() {
+                $("#show_table_option").show(500);
+            })
+            //hide option if user click to not add option
+        $("#filiere_option_Options_1").click(function() {
+            $("#show_table_option").hide(500);
+        })
+    })
+</script>{% endblock %}

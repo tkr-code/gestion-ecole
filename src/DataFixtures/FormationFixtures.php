@@ -10,29 +10,14 @@ class FormationFixtures extends Fixture
 {
     public function load(ObjectManager $manager): void
     {
-        $formations =
-        [
-            [
-                'nom'=>'Informatique de gestion',
-                'cout'=>'729000',
-                'etat'=>'Activer'
-            ],
-            [
-                'nom'=>'Genie civil',
-                'cout'=>'729000',
-                'etat'=>'Désactiver'
-            ],
-        ];
-        
-        foreach($formations as $key =>$v)
-        {
+        //creation de 100 formations juste pour voir la pagination
+        for ($i = 1; $i <= 100; $i++) {
             $formation = new Formation();
-            $formation->setDesignation($v['nom'])
-            ->setCout($v['cout'])
-            ->setEtat($v['etat']);
+
+            $formation->setDesignation("DEPT_" . $i)
+                ->setCout(rand(100000,1000000));
             $manager->persist($formation);
         }
-
         $manager->flush();
     }
 }

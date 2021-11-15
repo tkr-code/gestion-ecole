@@ -1,0 +1,154 @@
+{% extends 'admin/base.html.twig' %}
+{% import "macros/button.html.twig" as button %}
+{% import "macros/link.html.twig" as link %}
+
+{% block title %}
+    Filiere
+                    
+                
+            
+        
+    
+{% endblock %}
+
+{% block body %}
+    <div class="row"></div>
+
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="card card-outline card-primary">
+                <div class="card-header">
+                    <h1>
+                        Filiere
+                                                                                                        
+                                                                                            
+                                                                    
+                                            
+                    </h1>
+                </div>
+                <div class="card-body">
+                    <table class="table">
+                        <tbody>
+                            <tr>
+                                <th>
+                                    Id
+                                                                                                                                                                    
+                                                                                                                                            
+                                                                                                        
+                                                                    
+                                </th>
+                                <td>
+                                    {{ filiere.id }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    Code
+                                                                                                                                                                    
+                                                                                                                                            
+                                                                                                        
+                                                                    
+                                </th>
+                                <td>
+                                    {{ filiere.code }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    Designation
+                                                                                                                                                                    
+                                                                                                                                            
+                                                                                                        
+                                                                    
+                                </th>
+                                <td>
+                                    {{ filiere.designation }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    Created_at
+                                                                                                                                                                    
+                                                                                                                                            
+                                                                                                        
+                                                                    
+                                </th>
+                                <td>
+                                    {{ filiere.createdAt ? filiere.createdAt|date_format_fr: '' }}
+                                    à
+                                                                                                                                                                                                    
+                                                                                                                                                                        
+                                                                                                                                                
+                                                                                                            
+                                                                        
+                                    {{ filiere.createdAt ? filiere.createdAt|date('H:i:s') : '' }}
+
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="card card-outline card-primary">
+                <div class="card-header">
+                    <h1>
+                        Options de la Filiere
+                                                                    
+                                            
+                    </h1>
+                </div>
+                <div class="card-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">
+                                    #
+                                                                    
+                                </th>
+                                <th scope="col">
+                                    Code Filiere
+                                                                    
+                                </th>
+                                <th scope="col">
+                                    Designation
+                                                                    
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% set i = 0 %}
+                            {% for option in options %}
+
+                                <tr>
+                                    <th scope="row">{% set i = i + 1 %} {{i}}</th>
+                                    <td>
+                                        {{option.code}}                                                                
+                                    </td>
+                                    <td>
+                                        {{option.designation}}                                                                
+                                    </td>
+
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    {# <a href="{{ path('admin_filiere_index') }}">back to list</a> #}
+    {{ link.back(path('admin_filiere_index')) }}
+
+    <a href="{{ path('admin_filiere_edit', {'id': filiere.id}) }}" class="btn btn-success">
+        <i class="fas fa-edit"></i>
+        &nbsp;edit
+                                    
+                            
+                    
+            
+    </a>
+{% endblock %}

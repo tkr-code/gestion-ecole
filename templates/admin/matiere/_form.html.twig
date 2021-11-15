@@ -1,0 +1,13 @@
+{% import "macros/button.html.twig" as buttons %}
+{% import "macros/link.html.twig" as links %}
+
+
+{{ form_start(form) }}
+{{ form_widget(form) }}
+<div class="btn-group">
+	{{links.back(path('admin_matiere_index'))}}
+	{{buttons.add()}}
+</div>
+{#    <button class="btn">{{ button_label|default('Save') }}</button>
+#}
+{{ form_end(form) }}
