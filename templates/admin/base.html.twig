@@ -222,17 +222,12 @@
           <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
             <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-
-            {# {{ nav.section('Dashboard',{icon: 'fas fa-tachometer-alt',pages:navs.getNavs.dashboard})}} #}
-
             {{ nav.list(navs.getNavs.dashboard,'',parent_page|default('')) }}
-            {{ nav.list(navs.getNavs.user,'User',parent_page|default('')) }}
+            {{ nav.list(navs.getNavs.user,'',parent_page|default('')) }}
 
             {% if is_granted('ROLE_ADMIN') %}
-            {{ nav.list(navs.getNavs.admin,'Admin',parent_page|default('')) }}
-            {# {{ nav.section('Admin',{role:'Admin',icon: 'fas fa-cogs',pages:navs.getNavs.admin})}} #}
+              {{ nav.list(navs.getNavs.admin,'Admin',parent_page|default('')) }}
             {% endif %}
-
             {{ nav.li({path:'app_logout',name:'log out',icon:'fas fa-power-off'}) }}
           </ul>
         </nav>

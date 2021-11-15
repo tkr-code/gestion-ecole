@@ -57,6 +57,9 @@ class NavExtension extends AbstractExtension
             ],
             'user'=>
             [
+            ],
+            'admin'=>
+            [
                 [
                     'name'=>'Professeur',
                     'links'=>[
@@ -65,14 +68,11 @@ class NavExtension extends AbstractExtension
                             'path'=>'admin_professeur_index'
                         ],
                         [
-                            'name'=>'Nouveau Professeur',
+                            'name'=>'New',
                             'path'=>'admin_professeur_new'
                         ],
                     ]
-                ]
-            ],
-            'admin'=>
-            [
+                ],
                 [
                     'name' => 'Formation',
                     'links' => 
