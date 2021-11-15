@@ -2,12 +2,14 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Personne;
 use App\Entity\User;
 use App\Form\UserType;
 use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
@@ -37,17 +39,25 @@ class UserController extends AbstractController
     /**
      * @Route("/new", name="user_new", methods={"GET","POST"})
      */
-    public function new(Request $request): Response
+    public function new(Request $request, UserPasswordHasherInterface $userPasswordHasherInterface): Response
     {
         $user = new User();
+        $personne = new Personne();
+        $personne->setPrenom('Prenom 1')
+        ->setNom('Nom 1')
+        ->setProfession('profession 1');
+        $user->setPersonne($personne);
+        $user->setEmail('user1@email.com');
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $user->setPassword($userPasswordHasherInterface->hashPassword($user,$user->getPassword()));
+            // dd($user);
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
             $entityManager->flush();
-
+            $this->addFlash('success','User enregistré');
             return $this->redirectToRoute('user_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -65,6 +75,7 @@ class UserController extends AbstractController
     {
         return $this->render('admin/user/show.html.twig', [
             'user' => $user,
+            'parent_page'=>$this->parent_page
         ]);
     }
 
@@ -85,6 +96,7 @@ class UserController extends AbstractController
         return $this->renderForm('admin/user/edit.html.twig', [
             'user' => $user,
             'form' => $form,
+            'parent_page'=>$this->parent_page
         ]);
     }
 

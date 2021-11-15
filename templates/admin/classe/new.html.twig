@@ -1,0 +1,23 @@
+{% extends 'admin/base.html.twig' %}
+{% import "macros/breadcrumb.html.twig" as breadcrumb %}
+
+{% block title %}New Classe{% endblock %}
+
+{% block breadcrumb %}
+    {{ breadcrumb.breadcrumb('New formation',[
+        {
+            name:'Manage formation',
+            path:path('admin_formation_index')
+        }
+    ]) }}
+{% endblock %}
+{% block body %}
+<div class="card card-outline card-dark">
+    <div class="card-header">
+        <h3>Create new Classe</h3>
+    </div>
+    <div class="card-body">
+        {{ include('admin/classe/_form.html.twig') }}
+    </div>
+</div>
+{% endblock %}

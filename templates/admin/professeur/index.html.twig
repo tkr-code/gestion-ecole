@@ -1,0 +1,57 @@
+{% extends 'admin/base.html.twig' %}
+{% import "macros/dataTable.html.twig" as dataTable %}
+{% import "macros/links.html.twig" as links %}
+{% import "macros/breadcrumb.html.twig" as breadcrumb %}
+
+{% block title %}Professeurs{% endblock %}
+
+{% block stylesheets %}
+{{ dataTable.css() }}
+{% endblock %}
+
+{% block breadcrumb %}
+    {{ breadcrumb.breadcrumb('Professeurs') }}
+{% endblock %}
+
+{% block javascripts %}
+{{ dataTable.js() }}
+{{ dataTable.script('#table-1')}}
+{% endblock %}
+
+{% block body %}
+<div class="card card-outline card-primary">
+    <div class="card-header">
+        <h1>Professeurs</h1>
+    </div>
+    <div class="card-body">
+        <div class="btn-group">
+            {{ links.new(path('admin_professeur_new')) }}
+        </div>
+        <table class="table" id="table-1">
+            <thead>
+                <tr>
+                    <th>Titre</th>
+                    <th>actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for professeur in professeurs %}
+                <tr>
+                    <td>{{ professeur.titre }}</td>
+                    <td>
+                        <div class="btn-group">
+                            <a href="{{ path('admin_professeur_show', {'id': professeur.id}) }}">show</a>
+                            <a href="{{ path('admin_professeur_edit', {'id': professeur.id}) }}">edit</a>
+                        </div>
+                    </td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="3">no records found</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

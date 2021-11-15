@@ -56,7 +56,19 @@ class NavExtension extends AbstractExtension
             ],
             'user'=>
             [
-                
+                [
+                    'name'=>'Professeur',
+                    'links'=>[
+                        [
+                            'name'=>'Professeurs',
+                            'path'=>'admin_professeur_index'
+                        ],
+                        [
+                            'name'=>'Nouveau Professeur',
+                            'path'=>'admin_professeur_new'
+                        ],
+                    ]
+                ]
             ],
             'admin'=>
             [
@@ -74,7 +86,20 @@ class NavExtension extends AbstractExtension
                     ]
                 ],
                 [
-                    'name'=>'user',
+                    'name'=>'Classe',
+                    'links'=>[
+                        [
+                            'name'=>'Classes',
+                            'path'=>'admin_classe_index'
+                        ],
+                        [
+                            'name'=>'New',
+                            'path'=>'admin_classe_new'
+                        ]
+                    ]
+                ],
+                [
+                    'name'=>'User',
                     'icon'=>'fas fa-users',
                     'links'=>[
                         [
@@ -82,7 +107,7 @@ class NavExtension extends AbstractExtension
                             'path'=>'user_index',
                         ],
                         [
-                            'name'=>$this->translator->trans('New'),
+                            'name'=>$this->translator->trans('New User'),
                             'path'=>'user_new',
                         ],
                     ]

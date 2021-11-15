@@ -1,4 +1,41 @@
+{% import "macros/links.html.twig" as links %}
+
 {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn btn-primary">{{ button_label|default('Save') }}</button>
-{{ form_end(form) }}
+<div class="row">
+    <div class="col-lg-12">
+        <div class="row">
+            <div class="col-md-6 col-12">
+                {{ form_row(form.personne.prenom)}}
+            </div>
+            <div class="col-md-6 col-12">
+                {{ form_row(form.personne.nom)}}
+            </div>
+            <div class="col-md-6 col-12">
+                {{ form_row(form.email)}}
+            </div>
+            <div class="col-md-6 col-12">
+                {{ form_row(form.roles)}}
+            </div>
+            <div class="col-md-6 col-12">
+                {{ form_row(form.password)}}
+            </div>
+            <div class="col-md-6 col-12">
+                {{ form_row(form.personne.profession)}}
+            </div>
+            <div class="col-md-6 col-12">
+                {{ form_row(form.personne.avatar)}}
+            </div>
+            <div class="col-md-6 col-12">
+                {{ form_row(form.etat)}}
+            </div>
+            <div class="col-md-6 col-12">
+                {{ form_row(form.isVerified)}}
+            </div>
+        </div>
+    {{ form_end(form) }}
+        <div class="btn-group">
+            {{ links.back(path('user_index')) }}
+            <button class="btn btn-success">{{ button_label|default('Save') }}</button>
+        </div>
+    </div>
+</div>

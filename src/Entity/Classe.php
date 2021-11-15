@@ -6,9 +6,12 @@ use App\Repository\ClasseRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass=ClasseRepository::class)
+ * @UniqueEntity(fields={"code"})
  */
 class Classe
 {
@@ -38,6 +41,11 @@ class Classe
      * @ORM\ManyToOne(targetEntity=Cour::class, inversedBy="classes")
      */
     private $cours;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $designation;
 
     public function getId(): ?int
     {
@@ -88,6 +96,18 @@ class Classe
     public function setCours(?Cour $cours): self
     {
         $this->cours = $cours;
+
+        return $this;
+    }
+
+    public function getDesignation(): ?string
+    {
+        return $this->designation;
+    }
+
+    public function setDesignation(string $designation): self
+    {
+        $this->designation = $designation;
 
         return $this;
     }

@@ -127,4 +127,8 @@ class Personne
 
         return $this;
     }
+
+    public function fullName(){
+        return ucfirst($this->getPrenom()).' '.ucfirst($this->getNom());
+    }
 }

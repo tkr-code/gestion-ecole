@@ -1,0 +1,62 @@
+{% extends 'admin/base.html.twig' %}
+{% import "macros/dataTable.html.twig" as dataTable %}
+{% import "macros/links.html.twig" as links %}
+{% import "macros/alertes.html.twig" as alertes %}
+{% block title %}Classe index{% endblock %}
+
+{% block head %}
+    {{ dataTable.css() }}
+{% endblock %}
+
+{% block foot %}
+    {{ dataTable.js() }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ dataTable.script('#table-1') }}
+{% endblock %}
+{% block body %}
+{% for item in app.flashes('success') %}
+    {{ alertes.alert(item,'success')}}
+{% endfor %}
+<div class="card card-outline card-primary">
+    <div class="card-header">
+        <h3>Classes</h3>
+    </div>
+    <div class="card-body">
+        <div class="row mb-3">
+            <div class="col">
+                <a href="{{ path('admin_classe_new') }}" class="btn btn-primary">Create new</a>
+            </div>
+        </div>
+    <table id="table-1" class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Code</th>
+                <th>Salle</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for classe in classes %}
+            <tr>
+                <td>{{ classe.id }}</td>
+                <td>{{ classe.code }}</td>
+                <td>{{ classe.salle }}</td>
+                <td>
+                    <a href="{{ path('admin_classe_show', {'id': classe.id}) }}">show</a>
+                    <a href="{{ path('admin_classe_edit', {'id': classe.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    </div>
+</div>
+
+{% endblock %}
