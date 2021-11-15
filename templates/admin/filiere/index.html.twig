@@ -61,10 +61,11 @@ javascripts %} {{ dataTable.script("#table-1") }} {% endblock %} {% block title 
                 </tr>
             </thead>
             <tbody>
+                {% set i = 0 %}
                 {% for filiere in filieres %}
                 <tr>
                     <td>
-                        {{ filiere.id }}
+                        {% set i = i + 1 %}{{ i }}
                     </td>
                     <td>
                         {{ filiere.code }}

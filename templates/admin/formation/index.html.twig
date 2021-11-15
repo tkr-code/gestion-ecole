@@ -37,9 +37,10 @@
                 </tr>
             </thead>
             <tbody>
+                {% set i = 0 %}
                 {% for formation in formations %}
                 <tr>
-                    <td>{{ formation.id }}</td>
+                    <td>{% set i = i + 1 %}{{i}}</td>
                     <td>{{ formation.designation }}</td>
                     <td>{{ formation.cout }}</td>
                     <td>{{ formation.createdAt ? formation.createdAt|date_format_fr : '' }}</td>

@@ -40,9 +40,10 @@
 					</tr>
 				</thead>
 				<tbody>
+					{% set i = 0 %}
 					{% for departement in departements %}
 						<tr>
-							<td>{{ departement.id }}</td>
+							<td>{% set i = i + 1 %}{{i}}</td>
 							<td>{{ departement.code }}</td>
 							<td>{{ departement.designation }}</td>
 							<td>{{ departement.createdAt ? departement.createdAt|date_format_fr : '' }}</td>

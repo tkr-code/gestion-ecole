@@ -41,9 +41,10 @@ Matieres
                 </tr>
             </thead>
             <tbody>
+                {% set i = 0 %}
                 {% for matiere in matieres %}
                 <tr>
-                    <td>{{ matiere.id }}</td>
+                    <td> {% set i = i + 1 %}{{ i }}</td>
                     <td>{{ matiere.code }}</td>
                     <td>{{ matiere.designation }}</td>
                     <td>{{ matiere.createdAt ? matiere.createdAt|date_format_fr : '' }}</td>
