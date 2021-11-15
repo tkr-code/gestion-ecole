@@ -1,26 +1,227 @@
-{% extends 'admin/base.html.twig' %}
-{% import "macros/button.html.twig" as button %}
-{% import "macros/link.html.twig" as link %}
+{% extends 'admin/base.html.twig' %} {% import "macros/button.html.twig" as button %} {% import "macros/link.html.twig" as link %} {% block title %} Edit Filiere {% endblock %} {% block body %}
+<div class="row">
+    <div class="col-lg-5">
+        <div class="card card-outline card-success">
+            <div class="card-header">
+                <h3>
+                    Edit Filiere
+                </h3>
+            </div>
+            <div class="card-body">
+                {{ form_start(form) }} {{ form_row(form.code) }} {{ form_row(form.designation) }} {{ form_row(form.departement) }}
+                <div class="btn-group">
+                    {{ link.back(path('admin_filiere_index')) }} {{ button.edit() }}
+                </div>
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-7">
+        <div class="card card-outline card-success">
+            <div class="card-header">
+                <h3>
+                    Liste des Options disponible pour la filiere : {{filiere.designation}}
+                </h3>
+            </div>
+            <div class="card-body">
+                {% if Options %}
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">
+                                #
 
-{% block title %}
-	Edit Filiere
-{% endblock %}
+                            </th>
+                            <th scope="col">
+                                Code Option
+                            </th>
+                            <th scope="col">
+                                Designation
+                            </th>
+                            <th scope="col">
+                                Actions
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% set i = 0 %} {% for option in Options %}
+                        <tr>
+                            <th scope="row">
+                                {% set i = i + 1 %} {{ i }}
 
-{% block body %}
-	<div class="card card-outline card-success">
-		<div class="card-header">
-			<h3>Edit Filiere</h3>
-		</div>
-		<div class="card-body">
-			{{form_start(form)}}
-			{{form_row(form.code)}}
-			{{form_row(form.designation)}}
-			{{form_row(form.departement)}}
-			<div class="btn-group">
-				{{link.back(path('admin_filiere_index'))}}
-				{{button.edit()}}
-			</div>
-			{{form_end(form)}}
-		</div>
-	</div>
+                            </th>
+                            <td>
+                                {{ option.code }}
+
+                            </td>
+                            <td>
+                                {{ option.designation }}
+
+                            </td>
+
+                            <td>
+                                <a href="{{path('admin_filiere_edit_option',{'idF': filiere.id,'idOp':option.id})}}" class="btn btn-success">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                                <a href="#" class="btn btn-danger del" data-del="{{option.id}}">
+                                    <i class="fas fa-trash"></i>
+                                </a>
+
+                            </td>
+                        </tr>
+                        {% endfor %}
+
+                    </tbody>
+                </table>
+                {% else %}
+                <div class="btn btn-warning mb-1">Aucune Option Disponible</div> <br>{% endif %}
+                <div class="btn-group">
+                    {{ link.back(path('admin_filiere_index')) }}
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<br>
+<div class="row">
+    <div class="col-lg-5">{#
+        <div class="card card-outline card-success">
+            <div class="card-header">
+            </div>
+            <div class="card-body">
+            </div>
+        </div> #}
+    </div>
+    <div class="col-lg-7">
+        <div class="card card-outline card-success mb-3">
+            <div class="card-header">
+                <h3>
+                    Ajouter une Option à cette Filiere ?
+
+                </h3>
+            </div>
+            {{ form_start(OptionFiliereForm) }}
+            <div class="card-body">
+                {{ form_row(OptionFiliereForm.Options) }}
+                <div id="optionFiliere_show">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">
+                                    #
+                                </th>
+                                <th scope="col">
+                                    Code option Filiere
+                                </th>
+                                <th scope="col">
+                                    Designation
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody id="affiche_table_Option">
+                            {# la ligne s'ajoute ici #}
+                        </tbody>
+                    </table>
+                    <div class="row">
+                        <div class="col-md-4"></div>
+                        <div class="col-md-4">
+                        </div>
+                        <div class="col-md-4">
+                            <a href="#" class="btn btn-success" id="add">
+                                +
+                            </a>
+                            <a href="#" class="btn btn-danger" id="remove">
+                                -                                                
+                             </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4"></div>
+                    <div class="col-md-4">
+                        <div class="btn-group">
+                            {{ link.back(path('admin_filiere_index')) }} {{ button.add() }}
+                        </div>
+                    </div>
+                    <div class="col-md-4"></div>
+                </div>
+
+            </div>
+            {{ form_end(OptionFiliereForm) }}
+        </div>
+    </div>
+
+</div>
+{% endblock %} {% block javascripts %}
+<script>
+    $(document).ready(function() {
+        addOptionFiliere(1);
+
+        function addOptionFiliere(id) {
+            $.ajax({
+                url: "{{path('admin_filiere_edit',{'id':filiere.id})}}",
+                method: "POST",
+                dataType: "JSON",
+                data: {
+                    optFi: 1,
+                    id: id
+                },
+                success: function(data) {
+                    $("#affiche_table_Option").append(data);
+                    let n = 0;
+                    //call back pour afficher la numerotation
+                    $(".num").each(function() {
+                        $(this).html(++n);
+                    })
+                }
+            })
+        }
+
+        $("#add").click(function() {
+            addOptionFiliere(1);
+        })
+
+        $("#remove").click(function() {
+            //enleve la derniere ligne du tableau
+            $("#affiche_table_Option").children("tr:last").remove();
+        })
+
+        //hide the container
+        $("#optionFiliere_show").hide();
+
+        $("#mon_choix_filiere_Options_1").click(function() {
+            $("#optionFiliere_show").hide(500);
+        })
+
+        $("#mon_choix_filiere_Options_0").click(function() {
+            $("#optionFiliere_show").show(500);
+        })
+
+        $(".del").click(function() {
+            var id = $(this).data("del");
+            if (confirm("La suppression est irrecuperable, voulez-vous supprimer cette Option ?")) {
+                $.ajax({
+                    url: "{{path('admin_filiere_del_option')}}",
+                    method: "POST",
+                    dataType: "JSON",
+                    data: {
+                        del: 1,
+                        id: id
+                    },
+                    success: function(data) {
+                        if (data["message"] == "ok") {
+                            alert("Option supprimée avec Succes");
+                            window.location.href = "";
+                        } else {
+                            alert("Suppression Impossible, veuillez réessayer");
+                        }
+                    }
+                })
+            }
+
+        })
+
+    })
+</script>
 {% endblock %}

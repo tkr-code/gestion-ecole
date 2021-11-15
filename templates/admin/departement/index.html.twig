@@ -47,8 +47,8 @@
 							<td>{{ departement.designation }}</td>
 							<td>{{ departement.createdAt ? departement.createdAt|date_format_fr : '' }}</td>
 							<td>
-								<a href="{{ path('admin_departement_show', {'id': departement.id}) }}">show</a>
-								<a href="{{ path('admin_departement_edit', {'id': departement.id}) }}">edit</a>
+								<a href="{{ path('admin_departement_show', {'id': departement.id}) }}" class="btn btn-dark"><i class="fas fa-eye"></i></a>
+								<a href="{{ path('admin_departement_edit', {'id': departement.id}) }}" class="btn btn-success"><i class="fas fa-edit"></i></a>
 							</td>
 						</tr>
 					{% else %}

@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\OptionFiliereRepository;
+use DateTime;
 use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -41,6 +42,11 @@ class OptionFiliere
      * @ORM\ManyToOne(targetEntity=Filiere::class, inversedBy="options")
      */
     private $filiere;
+
+    public function __construct()
+    {
+        $this->created_at = new \DateTime();
+    }
 
     public function getId(): ?int
     {

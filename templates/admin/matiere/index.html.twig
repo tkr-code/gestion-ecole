@@ -48,8 +48,8 @@ Matieres
                     <td>{{ matiere.designation }}</td>
                     <td>{{ matiere.createdAt ? matiere.createdAt|date_format_fr : '' }}</td>
                     <td>
-                        <a href="{{ path('admin_matiere_show', {'id': matiere.id}) }}">show</a>
-                        <a href="{{ path('admin_matiere_edit', {'id': matiere.id}) }}">edit</a>
+                        <a href="{{ path('admin_matiere_show', {'id': matiere.id}) }}" class="btn btn-dark"><i class="fas fa-eye"></i></a>
+                        <a href="{{ path('admin_matiere_edit', {'id': matiere.id}) }}" class="btn btn-success"><i class="fas fa-edit"></i></a>
                     </td>
                 </tr>
                 {% else %}
