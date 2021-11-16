@@ -33,10 +33,9 @@ Matieres
         <table class="table" id="table-1">
             <thead>
                 <tr>
-                    <th>Id</th>
                     <th>Code</th>
                     <th>Designation</th>
-                    <th>Created_at</th>
+                    <th>Created at</th>
                     <th>actions</th>
                 </tr>
             </thead>
@@ -44,7 +43,6 @@ Matieres
                 {% set i = 0 %}
                 {% for matiere in matieres %}
                 <tr>
-                    <td> {% set i = i + 1 %}{{ i }}</td>
                     <td>{{ matiere.code }}</td>
                     <td>{{ matiere.designation }}</td>
                     <td>{{ matiere.createdAt ? matiere.createdAt|date_format_fr : '' }}</td>

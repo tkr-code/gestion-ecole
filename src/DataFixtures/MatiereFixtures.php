@@ -10,14 +10,27 @@ class MatiereFixtures extends Fixture
 {
     public function load(ObjectManager $manager): void
     {
-        //creation de 100 matieres juste pour voir la pagination
-        for ($i = 1; $i <= 100; $i++) {
-            $matiere = new Matiere();
-
-            $matiere->setCode("Mat_" . $i)
-                ->setDesignation("Matiere numero: " . $i);
+        $matiers =[
+            [
+                'name'=>'Mathématique',
+                'code'=>'Math',
+            ],
+            [
+                'name'=>'Php',
+                'code'=>'Php'
+            ],
+            [
+                'name'=>"Technique d'expression",
+                'code'=>'TE'
+            ]
+        ];
+        foreach($matiers as $value){
+        $matiere = new Matiere();
+            $matiere
+            ->setCode($value['code'])
+            ->setDesignation($value['name']);
             $manager->persist($matiere);
-            $manager->flush();
         }
+        $manager->flush();
     }
 }

@@ -51,7 +51,7 @@ class Filiere
     private $departement;
 
     /**
-     * @ORM\OneToMany(targetEntity=OptionFiliere::class, mappedBy="filiere")
+     * @ORM\OneToMany(targetEntity=OptionFiliere::class, mappedBy="filiere", cascade={"persist"})
      */
     private $options;
 

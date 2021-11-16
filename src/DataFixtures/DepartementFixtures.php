@@ -10,14 +10,19 @@ class DepartementFixtures extends Fixture
 {
     public function load(ObjectManager $manager): void
     {
-        //creation de 100 departs juste pour voir la pagination
-        for ($i = 1; $i <= 100; $i++) {
+        $departements =[
+            [
+                'code'=>'DEP-INFO-GESTION',
+                'name'=>'Informatque'
+            ],
+        ];
+        foreach ($departements as $value) {
             $depart = new Departement();
-
-            $depart->setCode("DEPT_" . $i)
-                ->setDesignation("Departement numero: " . $i);
+            $depart->setCode($value['code'])
+                ->setDesignation($value['name']);
+                $this->addReference($value['code'],$depart);
             $manager->persist($depart);
-            $manager->flush();
         }
+        $manager->flush();
     }
 }

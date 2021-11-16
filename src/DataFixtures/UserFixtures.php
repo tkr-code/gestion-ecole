@@ -45,6 +45,7 @@ class UserFixtures extends Fixture
                  ->setIsVerified(true)
                  ->setPassword($this->passwordEncoder->hashPassword($user,'password'))
                  ->setRoles($value['roles'])
+                 ->setEtat('Activer')
                  ->setPersonne($personne);
 
             $this->em->persist($user);
