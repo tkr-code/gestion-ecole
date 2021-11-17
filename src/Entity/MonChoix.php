@@ -1,6 +1,7 @@
 <?php
 namespace App\Entity;
 /**Cette classe n'est pas reliee en base de donnes, elle est la juste pour aboutir à une fin precise */
+
 class MonChoix{
     private  $choix;
 
