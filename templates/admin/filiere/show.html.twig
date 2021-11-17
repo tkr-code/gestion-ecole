@@ -1,8 +1,10 @@
 {% extends 'admin/base.html.twig' %}
-{% import "macros/buttons.html.twig" as button %}
-{% import "macros/links.html.twig" as link %}
+{% import "macros/buttons.html.twig" as buttons %}
+{% import "macros/links.html.twig" as links %}
 
-{% block title %}Filiere{% endblock %}
+{% block title %}
+    Filiere
+{% endblock %}
 
 {% block body %}
     <div class="row"></div>
@@ -12,10 +14,7 @@
             <div class="card card-outline card-primary">
                 <div class="card-header">
                     <h1>
-                        Filiere
-                                                                                                        
-                                                                                            
-                                                                    
+                        Filiere                     
                                             
                     </h1>
                 </div>
@@ -24,10 +23,7 @@
                         <tbody>
                             <tr>
                                 <th>
-                                    Id
-                                                                                                                                                                    
-                                                                                                                                            
-                                                                                                        
+                                    Id                                  
                                                                     
                                 </th>
                                 <td>
@@ -36,10 +32,7 @@
                             </tr>
                             <tr>
                                 <th>
-                                    Code
-                                                                                                                                                                    
-                                                                                                                                            
-                                                                                                        
+                                    Code                                  
                                                                     
                                 </th>
                                 <td>
@@ -48,10 +41,7 @@
                             </tr>
                             <tr>
                                 <th>
-                                    Designation
-                                                                                                                                                                    
-                                                                                                                                            
-                                                                                                        
+                                    Designation                                  
                                                                     
                                 </th>
                                 <td>
@@ -60,19 +50,12 @@
                             </tr>
                             <tr>
                                 <th>
-                                    Created_at
-                                                                                                                                                                    
-                                                                                                                                            
-                                                                                                        
+                                    Created_at                                   
                                                                     
                                 </th>
                                 <td>
                                     {{ filiere.createdAt ? filiere.createdAt|date_format_fr: '' }}
-                                    à
-                                                                                                                                                                                                    
-                                                                                                                                                                        
-                                                                                                                                                
-                                                                                                            
+                                    à                                   
                                                                         
                                     {{ filiere.createdAt ? filiere.createdAt|date('H:i:s') : '' }}
 
@@ -87,8 +70,7 @@
             <div class="card card-outline card-primary">
                 <div class="card-header">
                     <h1>
-                        Options de la Filiere
-                                                                    
+                        Options de la Filiere                      
                                             
                     </h1>
                 </div>
@@ -98,14 +80,17 @@
                             <tr>
                                 <th scope="col">
                                     #
+                                                                                                        
                                                                     
                                 </th>
                                 <th scope="col">
                                     Code Filiere
+                                                                                                        
                                                                     
                                 </th>
                                 <th scope="col">
                                     Designation
+                                                                                                        
                                                                     
                                 </th>
                             </tr>
@@ -115,12 +100,15 @@
                             {% for option in options %}
 
                                 <tr>
-                                    <th scope="row">{% set i = i + 1 %} {{i}}</th>
+                                    <th scope="row">
+                                        {% set i = i + 1 %}
+                                        {{ i }}
+                                    </th>
                                     <td>
-                                        {{option.code}}                                                                
+                                        {{ option.code }}
                                     </td>
                                     <td>
-                                        {{option.designation}}                                                                
+                                        {{ option.designation }}
                                     </td>
 
                                 </tr>
@@ -133,15 +121,8 @@
 
     </div>
 
-    {# <a href="{{ path('admin_filiere_index') }}">back to list</a> #}
-    {{ link.back(path('admin_filiere_index')) }}
-
-    <a href="{{ path('admin_filiere_edit', {'id': filiere.id}) }}" class="btn btn-success">
-        <i class="fas fa-edit"></i>
-        &nbsp;edit
-                                    
-                            
-                    
-            
-    </a>
+    <div class="btn-group">
+        {{ links.back(path('admin_filiere_index')) }}
+        {{ links.edit(path('admin_filiere_edit', {'id': filiere.id})) }}
+    </div>
 {% endblock %}

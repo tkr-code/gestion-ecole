@@ -38,7 +38,7 @@ class DepartementController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($departement);
             $entityManager->flush();
-
+            $this->addFlash('success', 'Nouveau Departement enregistré');
             return $this->redirectToRoute('admin_departement_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -83,7 +83,7 @@ class DepartementController extends AbstractController
      */
     public function delete(Request $request, Departement $departement): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$departement->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $departement->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($departement);
             $entityManager->flush();

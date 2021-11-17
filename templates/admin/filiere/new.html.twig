@@ -1,14 +1,16 @@
 {% extends 'admin/base.html.twig' %}
 {% import "macros/buttons.html.twig" as buttons %}
-{% import "macros/links.html.twig" as link %}
+{% import "macros/links.html.twig" as links %}
 {% block title %}
     New Filiere 
+    
 {% endblock %}
 {% block body %}
     <div class="card card-outline card-dark">
         <div class="card-header">
             <h3>
                 Create new Filiere      
+                            
             </h3>
         </div>
         <div class="card-body">
@@ -24,6 +26,7 @@
                 <div class="col-lg-6">
                     <h3>
                         Ajouter une Option ?               
+                                            
                     </h3>
                     {{ form_row(form.Options) }}
                     <div id="show_table_option">
@@ -32,15 +35,18 @@
                                 <tr>
                                     <th scope="col">
                                         #
-                                                                        
+                                                                                                                
+                                                                            
                                     </th>
                                     <th scope="col">
                                         Code Option
-                                                                        
+                                                                                                                
+                                                                            
                                     </th>
                                     <th scope="col">
                                         Designation
-                                                                        
+                                                                                                                
+                                                                            
                                     </th>
                                 </tr>
                             </thead>
@@ -51,11 +57,13 @@
                             <div class="col-md-4">
                                 <a href="#" class="btn btn-success " id="add">
                                     +
-                                                                
+                                                                                                    
+                                                                    
                                 </a>
                                 <a href="#" class="btn btn-danger " id="remove">
                                     -
-                                                                
+                                                                                                    
+                                                                    
                                 </a>
                             </div>
                             <div class="col-md-4 "></div>
@@ -67,17 +75,21 @@
             <div class="row">
                 <div class="col-md-4"></div>
                 <div class="col-md-4 mb-3">
-                    {{ buttons.add() }}
+                    <div class="btn-group">
+                        {{ links.back(path('admin_filiere_index')) }}
+                        {{ buttons.add() }}
+                    </div>
                 </div>
                 <div class="col-md-4"></div>
             </div>
 
-        {{ form_end(form) }}
+            {{ form_end(form) }}
         </div>
 
     </div>
 {% endblock %}
-{% block javascripts %}<script>
+{% block javascripts %}
+    <script>
     $(document).ready(function() {
         addOptionFiliere();
 
@@ -119,4 +131,5 @@
             $("#show_table_option").hide(500);
         })
     })
-</script>{% endblock %}
+</script>
+{% endblock %}

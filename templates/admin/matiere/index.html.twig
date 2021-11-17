@@ -1,62 +1,100 @@
 {% import "macros/dataTable.html.twig" as dataTable %}
-{% extends 'admin/base.html.twig' %} 
+{% import "macros/links.html.twig" as links %}
+{% import "macros/alertes.html.twig" as alertes %}
+{% extends 'admin/base.html.twig' %}
 
 {% block title %}
-Matieres
-{% endblock %} 
-
-{% block head %}
-{{ dataTable.css() }} 
+    Matieres
+            
+        
+    
 {% endblock %}
 
-{% block foot %} 
-{{ dataTable.js() }}
+{% block head %}
+    {{ dataTable.css() }}
+{% endblock %}
+
+{% block foot %}
+    {{ dataTable.js() }}
 {% endblock %}
 
 {% block javascripts %}
-{{ dataTable.script('#table-1') }} 
+    {{ dataTable.script('#table-1') }}
 {% endblock %}
 
 {% block body %}
+{% for message in app.flashes('success') %}
+    {{alertes.alert(message,'success')}}
+{% endfor %}
+    <div class="card card-outline card-primary">
 
-<div class="card card-outline card-primary">
-
-    <div class="card-header">
-        <h3>Matieres</h3>
-    </div>
-    <div class="card-body">
-        <div class="row mb-3">
-            <div class="col">
-                <a href="{{ path('admin_matiere_new') }}" class="btn btn-primary">Create new</a>
-            </div>
+        <div class="card-header">
+            <h3>
+                Matiere              
+            </h3>
         </div>
-        <table class="table" id="table-1">
-            <thead>
-                <tr>
-                    <th>Code</th>
-                    <th>Designation</th>
-                    <th>Created at</th>
-                    <th>actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% set i = 0 %}
-                {% for matiere in matieres %}
-                <tr>
-                    <td>{{ matiere.code }}</td>
-                    <td>{{ matiere.designation }}</td>
-                    <td>{{ matiere.createdAt ? matiere.createdAt|date_format_fr : '' }}</td>
-                    <td>
-                        <a href="{{ path('admin_matiere_show', {'id': matiere.id}) }}" class="btn btn-dark"><i class="fas fa-eye"></i></a>
-                        <a href="{{ path('admin_matiere_edit', {'id': matiere.id}) }}" class="btn btn-success"><i class="fas fa-edit"></i></a>
-                    </td>
-                </tr>
-                {% else %}
-                <tr>
-                    <td colspan="5">no records found</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+        <div class="card-body">
+            <div class="row mb-3">
+                <div class="col">
+                    {{ links.new(path('admin_matiere_new')) }}
+                </div>
+            </div>
+            <table class="table" id="table-1">
+                <thead>
+                    <tr>
+                        <th>
+                            Code
+                                                                                
+                                                    
+                        </th>
+                        <th>
+                            Designation
+                                                                                
+                                                    
+                        </th>
+                        <th>
+                            Created at
+                                                                                
+                                                    
+                        </th>
+                        <th>
+                            actions
+                                                                                
+                                                    
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% set i = 0 %}
+                    {% for matiere in matieres %}
+                        <tr>
+                            <td>
+                                {{ matiere.code }}
+                            </td>
+                            <td>
+                                {{ matiere.designation }}
+                            </td>
+                            <td>
+                                {{ matiere.createdAt ? matiere.createdAt|date_format_fr : '' }}
+                            </td>
+                            <td>
+                                <div class="btn-group">
+                                    {{ links.show(path('admin_matiere_show', {'id': matiere.id})) }}
+                                    {{ links.edit(path('admin_matiere_edit', {'id': matiere.id})) }}
+                                </div>
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="5">
+                                no records found
+                                                                                            
+                                                            
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
     </div>
-</div> {% endblock %}
+{% endblock %}

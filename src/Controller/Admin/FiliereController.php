@@ -95,6 +95,7 @@ class FiliereController extends AbstractController
                     $entityManager = $this->getDoctrine()->getManager();
                     $entityManager->persist($optionFiliere);
                     $entityManager->flush();
+                    $this->addFlash('success','Nouvelle Filiere enregistrée');
                 }
                 //on redirige sur l'esemble des filieres
                 return $this->redirectToRoute("admin_filiere_index");
@@ -110,15 +111,11 @@ class FiliereController extends AbstractController
                 $entityManager = $this->getDoctrine()->getManager();
                 $entityManager->persist($filiere);
                 $entityManager->flush();
+                $this->addFlash('success','Nouvelle Filiere enregistrée');
 
                 //on redirige sur l'esemble des filieres
                 return $this->redirectToRoute("admin_filiere_index");
             }
-            //$entityManager = $this->getDoctrine()->getManager();
-            //  $entityManager->persist($filiere);
-            //  $entityManager->flush();
-
-            // return $this->redirectToRoute('admin_filiere_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('admin/filiere/new.html.twig', [

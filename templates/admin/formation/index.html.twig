@@ -18,8 +18,8 @@
 {% endblock %}
 
 {% block body %}
-{% for item in app.flashes('success') %}
-    {{ alertes.alert(item,'success')}}
+{% for message in app.flashes('success') %}
+    {{ alertes.alert(message,'success')}}
 {% endfor %}
 <div class="card card-outline card-primary">
     <div class="card-header">

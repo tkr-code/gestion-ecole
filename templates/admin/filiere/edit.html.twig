@@ -1,6 +1,6 @@
 {% extends 'admin/base.html.twig' %} 
 {% import "macros/buttons.html.twig" as button %} 
-{% import "macros/links.html.twig" as link %} 
+{% import "macros/links.html.twig" as links %} 
 {% block title %} Edit Filiere {% endblock %} 
 {% block body %}
 <div class="row">
@@ -14,7 +14,7 @@
             <div class="card-body">
                 {{ form_start(form) }} {{ form_row(form.code) }} {{ form_row(form.designation) }} {{ form_row(form.departement) }}
                 <div class="btn-group">
-                    {{ link.back(path('admin_filiere_index')) }} {{ button.edit() }}
+                    {{ links.back(path('admin_filiere_index')) }} {{ button.edit() }}
                 </div>
                 {{ form_end(form) }}
             </div>
@@ -64,13 +64,12 @@
                             </td>
 
                             <td>
-                                <a href="{{path('admin_filiere_edit_option',{'idF': filiere.id,'idOp':option.id})}}" class="btn btn-success">
-                                    <i class="fas fa-edit"></i>
-                                </a>
-                                <a href="#" class="btn btn-danger del" data-del="{{option.id}}">
-                                    <i class="fas fa-trash"></i>
-                                </a>
-
+                                <div class="btn-group">
+                                    {{links.edit(path('admin_filiere_edit_option',{'idF': filiere.id,'idOp':option.id}))}}
+                                    <a href="#" class="btn btn-danger del" data-del="{{option.id}}">
+                                        <i class="fas fa-trash"></i>
+                                    </a>
+                                </div>
                             </td>
                         </tr>
                         {% endfor %}
@@ -80,7 +79,7 @@
                 {% else %}
                 <div class="btn btn-warning mb-1">Aucune Option Disponible</div> <br>{% endif %}
                 <div class="btn-group">
-                    {{ link.back(path('admin_filiere_index')) }}
+                    {{ links.back(path('admin_filiere_index')) }}
                 </div>
             </div>
         </div>
@@ -145,7 +144,7 @@
                     <div class="col-md-4"></div>
                     <div class="col-md-4">
                         <div class="btn-group">
-                            {{ link.back(path('admin_filiere_index')) }} {{ button.add() }}
+                            {{ links.back(path('admin_filiere_index')) }} {{ button.add() }}
                         </div>
                     </div>
                     <div class="col-md-4"></div>

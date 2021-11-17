@@ -1,60 +1,86 @@
 {% extends 'admin/base.html.twig' %}
 {% import "macros/dataTable.html.twig" as dataTable %}
-{% import "macros/link.html.twig" as link %}
+{% import "macros/links.html.twig" as links %}
 
 {% block head %}
-	{{dataTable.css()}}
+    {{ dataTable.css() }}
 {% endblock %}
 
 {% block foot %}
-	{{dataTable.js()}}
+    {{ dataTable.js() }}
 {% endblock %}
 
 {% block javascripts %}
-	{{dataTable.script("#table-1")}}
+    {{ dataTable.script("#table-1") }}
 {% endblock %}
 
-{% block title %}Departement
+{% block title %}
+    Departement
+        
+    
 {% endblock %}
 
 {% block body %}
-	<div class="card card-outline card-lightblue">
-		<div class="card-header">
-			<h3>Departement</h3>
-		</div>
+    <div class="card card-outline card-lightblue">
+        <div class="card-header">
+            <h3>
+                Departement
+                            
+            </h3>
+        </div>
 
-		<div class="card-body">
+        <div class="card-body">
 
-			<table class="table" id="table-1">
-				<tbody>
-					<tr>
-						<th>Id</th>
-						<td>{{ departement.id }}</td>
-					</tr>
-					<tr>
-						<th>Code</th>
-						<td>{{ departement.code }}</td>
-					</tr>
-					<tr>
-						<th>Designation</th>
-						<td>{{ departement.designation }}</td>
-					</tr>
-					<tr>
-						<th>Créé le</th>
-						<td>
-							{{ departement.createdAt ? departement.createdAt|date_format_fr : '' }}
-							à
-							{{ departement.createdAt ? departement.createdAt|date('H:i:s') : '' }}
-						</td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
-	</div>
+            <table class="table" id="table-1">
+                <tbody>
+                    <tr>
+                        <th>
+                            Id
+                                                    
+                        </th>
+                        <td>
+                            {{ departement.id }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            Code
+                                                    
+                        </th>
+                        <td>
+                            {{ departement.code }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            Designation
+                                                    
+                        </th>
+                        <td>
+                            {{ departement.designation }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            Créé le
+                                                    
+                        </th>
+                        <td>
+                            {{ departement.createdAt ? departement.createdAt|date_format_fr : '' }}
+                            à
+                                                        							
+                                                        
+                            {{ departement.createdAt ? departement.createdAt|date('H:i:s') : '' }}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 
-	{#	<a href="{{ path('admin_departement_index') }}">back to list</a>
-			#}
-	{{link.back(path('admin_departement_index'))}}
-	<a href="{{ path('admin_departement_edit', {'id': departement.id}) }}" class="btn btn-success">
-		<i class="fas fa-edit"></i>&nbsp;edit</a>
+    <div class="btn-group">
+        {{ links.back(path('admin_departement_index')) }}
+        {{ links.edit(path('admin_departement_edit', {'id': departement.id}) ) }}
+    </div>
+
 {% endblock %}

@@ -38,6 +38,7 @@ class MatiereController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($matiere);
             $entityManager->flush();
+            $this->addFlash('success','Nouvelle Matiere Enregistrée');
 
             return $this->redirectToRoute('admin_matiere_index', [], Response::HTTP_SEE_OTHER);
         }

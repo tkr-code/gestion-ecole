@@ -40,7 +40,7 @@ class ProfesseurController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($professeur);
             $entityManager->flush();
-
+            $this->addFlash('success','Nouveau Professeur enregistrée');
             return $this->redirectToRoute('admin_professeur_index', [], Response::HTTP_SEE_OTHER);
         }
 
