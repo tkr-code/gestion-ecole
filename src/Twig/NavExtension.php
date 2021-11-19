@@ -25,59 +25,58 @@ class NavExtension extends AbstractExtension
 
     public function getNavs()
     {
-        return 
-        [
-            'dashboard'=>
+        return
             [
+                'dashboard' =>
                 [
-                    'name'=>$this->translator->trans('Dashboard'),
-                    'icon'=>'fas fa-tachometer-alt',
-                    'links'=>[
-                        [
-                            'name'=>$this->translator->trans('Dashboard').' 1',
-                            'path'=>'admin'
-                        ]
-                    ]
-                ],
-                [
-                    'name'=>'Profil',
-                    'path'=>'profile_index',
-                ],
-                [
-                    'name'=>'Gestion ecole',
-                    'icon'=>'fa fa-home',
-                    'links'=>
-                        [
+                    [
+                        'name' => $this->translator->trans('Dashboard'),
+                        'icon' => 'fas fa-tachometer-alt',
+                        'links' => [
                             [
-                                'name'=>$this->translator->trans('Home'),
-                                'path'=>'home'
+                                'name' => $this->translator->trans('Dashboard') . ' 1',
+                                'path' => 'admin'
                             ]
                         ]
-                ],
-            ],
-            'user'=>
-            [
-            ],
-            'admin'=>
-            [
-                [
-                    'name'=>'Professeur',
-                    'links'=>[
-                        [
-                            'name'=>'Professeurs',
-                            'path'=>'admin_professeur_index'
-                        ],
-                        [
-                            'name'=>'New',
-                            'path'=>'admin_professeur_new'
-                        ],
-                    ]
-                ],
-                [
-                    'name' => 'Formation',
-                    'links' => 
+                    ],
                     [
+                        'name' => 'Profil',
+                        'path' => 'profile_index',
+                    ],
+                    [
+                        'name' => 'Gestion ecole',
+                        'icon' => 'fa fa-home',
+                        'links' =>
                         [
+                            [
+                                'name' => $this->translator->trans('Home'),
+                                'path' => 'home'
+                            ]
+                        ]
+                    ],
+                ],
+                'user' =>
+                [],
+                'admin' =>
+                [
+                    [
+                        'name' => 'Professeur',
+                        'links' => [
+                            [
+                                'name' => 'Professeurs',
+                                'path' => 'admin_professeur_index'
+                            ],
+                            [
+                                'name' => 'New',
+                                'path' => 'admin_professeur_new'
+                            ],
+                        ]
+                    ],
+                    [
+                        'name' => 'Formation',
+                        'links' =>
+                        [
+                            [
                                 'name' => 'Formations',
                                 'path' => 'admin_formation_index'
                             ],
@@ -97,6 +96,20 @@ class NavExtension extends AbstractExtension
                             [
                                 'name' => 'New',
                                 'path' => 'admin_matiere_new'
+                            ]
+                        ]
+                    ],
+                    [
+                        'name' => 'Responsables Depart',
+                        'links' =>
+                        [
+                            [
+                                'name' => 'Responsables',
+                                'path' => 'admin_responsable_departement_index'
+                            ],
+                            [
+                                'name' => 'New',
+                                'path' => 'admin_responsable_departement_new'
                             ]
                         ]
                     ],
@@ -142,7 +155,7 @@ class NavExtension extends AbstractExtension
                             ],
                         ]
                     ]
-            ]
-        ];
+                ]
+            ];
     }
 }

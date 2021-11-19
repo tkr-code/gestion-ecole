@@ -1,0 +1,21 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}
+    New ResponsableDepartement
+            
+        
+    
+{% endblock %}
+
+{% block body %}
+    <div class="card card-outline card-dark">
+        <div class="card-header">
+            <h1>
+                Create new Responsable Departement                              
+            </h1>
+        </div>
+        <div class="card-body">
+            {{ include('admin/responsable_departement/_form.html.twig') }}
+        </div>
+    </div>
+{% endblock %}

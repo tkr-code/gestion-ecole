@@ -36,6 +36,11 @@ class ResponsableDepartement
      */
     private $departement;
 
+    // public function __construct()
+    // {
+    //     $this->date_entre_fonction = new \DateTime();
+    // }
+
     public function getId(): ?int
     {
         return $this->id;
