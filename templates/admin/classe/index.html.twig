@@ -34,7 +34,7 @@
             <tr>
                 <th>Id</th>
                 <th>Code</th>
-                <th>Salle</th>
+                <th>Salles</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -43,10 +43,16 @@
             <tr>
                 <td>{{ classe.id }}</td>
                 <td>{{ classe.code }}</td>
-                <td>{{ classe.salle }}</td>
                 <td>
-                    <a href="{{ path('admin_classe_show', {'id': classe.id}) }}">show</a>
-                    <a href="{{ path('admin_classe_edit', {'id': classe.id}) }}">edit</a>
+                {% for item in classe.salles %}
+                    {{ item.numero ~ ':' ~ item.nom ~ ' ' }}
+                {% endfor %}
+                </td>
+                <td>
+                    <div class="btn-group">
+                        {{ links.edit(path('admin_classe_edit', {'id': classe.id})) }}
+                        {{ links.show(path('admin_classe_edit', {'id': classe.id})) }}
+                    </div>
                 </td>
             </tr>
         {% else %}

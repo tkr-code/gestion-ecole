@@ -2,26 +2,33 @@
 {% import "macros/dataTable.html.twig" as dataTable %}
 {% import "macros/links.html.twig" as links %}
 {% import "macros/breadcrumb.html.twig" as breadcrumb %}
+{% import "macros/alertes.html.twig" as alertes %}
 
 {% block title %}Professeurs{% endblock %}
-
-{% block stylesheets %}
-{{ dataTable.css() }}
-{% endblock %}
 
 {% block breadcrumb %}
     {{ breadcrumb.breadcrumb('Professeurs') }}
 {% endblock %}
 
+{% block head %}
+    {{ dataTable.css() }}
+{% endblock %}
+
+{% block foot %}
+    {{ dataTable.js() }}
+{% endblock %}
+
 {% block javascripts %}
-{{ dataTable.js() }}
-{{ dataTable.script('#table-1')}}
+    {{ dataTable.script('#table-1') }}
 {% endblock %}
 
 {% block body %}
+{% for item in app.flashes('success') %}
+    {{ alertes.alert(item,'success')}}
+{% endfor %}
 <div class="card card-outline card-primary">
     <div class="card-header">
-        <h1>Professeurs</h1>
+        <h3>Professeurs</h3>
     </div>
     <div class="card-body">
         <div class="btn-group">
@@ -30,18 +37,24 @@
         <table class="table" id="table-1">
             <thead>
                 <tr>
-                    <th>Titre</th>
+                    <th>Professeur</th>                    
+                    <th>Matières</th>                    
                     <th>actions</th>
                 </tr>
             </thead>
             <tbody>
-                {% for professeur in professeurs %}
+                {% for user in professeurs %}
                 <tr>
-                    <td>{{ professeur.titre }}</td>
+                    <td>{{ user.personne.fullName }} - {{ user.professeur.titre }}</td>
+                    <td>
+                        {% for item in user.professeur.matieres %}
+                            {{ item.designation }}
+                        {% endfor %}
+                    </td>
                     <td>
                         <div class="btn-group">
-                            <a href="{{ path('admin_professeur_show', {'id': professeur.id}) }}">show</a>
-                            <a href="{{ path('admin_professeur_edit', {'id': professeur.id}) }}">edit</a>
+                            {{ links.show(path('admin_professeur_show', {'id': user.id}))}}
+                            {{ links.edit(path('admin_professeur_edit', {'id': user.id}))}}
                         </div>
                     </td>
                 </tr>
@@ -53,5 +66,5 @@
             </tbody>
         </table>
     </div>
-</div>
+</div> 
 {% endblock %}

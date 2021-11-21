@@ -18,6 +18,10 @@ class ProfesseurRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Professeur::class);
     }
+    public function query(){
+        return $this->createQueryBuilder('o');
+    }
+
 
     // /**
     //  * @return Professeur[] Returns an array of Professeur objects

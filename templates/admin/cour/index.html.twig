@@ -1,0 +1,60 @@
+{% extends 'admin/base.html.twig' %}
+{% import "macros/alertes.html.twig" as alertes %}
+{% import "macros/dataTable.html.twig" as dataTable %}
+{% import "macros/links.html.twig" as links %}
+{% import "macros/breadcrumb.html.twig" as breadcrumb %}
+
+{% block title %}Cours{% endblock %}
+{% block head %}
+    {{ dataTable.css() }}
+{% endblock %}
+
+{% block foot %}
+    {{ dataTable.js() }}
+{% endblock %}
+{% block breadcrumb %}
+    {{ breadcrumb.breadcrumb('Cours') }}
+{% endblock %}
+{% block javascripts %}
+    {{ dataTable.script('#table-1') }}
+{% endblock %}
+{% block body %}
+{% for item in app.flashes('success') %}
+    {{ alertes.alert(item,'success')}}
+{% endfor %}
+    <h1>Cour index</h1>
+
+    <table id="table-1" class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Date</th>
+                <th>Debut</th>
+                <th>Fin</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for cour in cours %}
+            <tr>
+                <td>{{ cour.id }}</td>
+                <td>{{ cour.date ? cour.date|date('Y-m-d') : '' }}</td>
+                <td>{{ cour.debut ? cour.debut|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ cour.fin ? cour.fin|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <div class="btn-group">
+                        {{ links.show(path('admin_cour_show', {'id': cour.id})) }}
+                        {{ links.edit(path('admin_cour_edit', {'id': cour.id})) }}
+                    </div>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('admin_cour_new') }}">Create new</a>
+{% endblock %}

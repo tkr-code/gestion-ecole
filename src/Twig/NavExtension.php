@@ -19,9 +19,6 @@ class NavExtension extends AbstractExtension
             new TwigFunction('sidebar', [$this, 'getNavs'])
         ];
     }
-    public function li()
-    {
-    }
 
     public function getNavs()
     {
@@ -61,6 +58,23 @@ class NavExtension extends AbstractExtension
             'admin'=>
             [
                 [
+                    'name'=>'Inscription',
+                    'path'=>'admin_inscription'
+                ],
+                [
+                    'name'=>'Etudiant',
+                    'links'=>[
+                        [
+                            'name'=>'Etudiants',
+                            'path'=>'admin_etudiant_index'
+                        ],
+                        [
+                            'name'=>'New',
+                            'path'=>'admin_etudiant_new'
+                        ],
+                    ]
+                ],
+                [
                     'name'=>'Professeur',
                     'links'=>[
                         [
@@ -74,74 +88,111 @@ class NavExtension extends AbstractExtension
                     ]
                 ],
                 [
+                    "name" => 'Matière',
+                    'links' => [
+                        [
+                            'name' => 'Matières',
+                            'path' => 'admin_matiere_index'
+                        ],
+                        [
+                            'name' => 'New',
+                            'path' => 'admin_matiere_new'
+                        ]
+                    ]
+                ],
+                [
+                    'name'=>'Salle',
+                    'links'=>[
+                    [
+                        'name'=>'Salles',
+                        'path'=>'admin_salle_index'
+                    ],
+                    [
+                        'name'=>'New',
+                        'path'=>'admin_salle_new'
+                    ],
+                    ]
+
+                ],
+                [
+                    'name'=>'Cour',
+                    'links'=>[
+                        [
+                            'name'=>'Cours',
+                            'path'=>'admin_cour_index'
+                        ]
+                    ]
+                ],
+                [
+                    'name' => 'Classe',
+                    'links' => 
+                    [
+                        [
+                            'name' => 'Classes',
+                            'path' => 'admin_classe_index'
+                        ],
+                        [
+                            'name' => 'New',
+                            'path' => 'admin_classe_new'
+                        ]
+                    ]
+                ],
+                [
                     'name' => 'Formation',
                     'links' => 
                     [
                         [
-                                'name' => 'Formations',
-                                'path' => 'admin_formation_index'
-                            ],
-                            [
-                                'name' => 'New',
-                                'path' => 'admin_formation_new'
-                            ]
-                        ]
-                    ],
-                    [
-                        "name" => 'Matiere',
-                        'links' => [
-                            [
-                                'name' => 'Matieres',
-                                'path' => 'admin_matiere_index'
-                            ],
-                            [
-                                'name' => 'New',
-                                'path' => 'admin_matiere_new'
-                            ]
-                        ]
-                    ],
-                    [
-                        'name' => 'Departement',
-                        'links' => [
-                            [
-                                'name' => 'Departements',
-                                'path' => 'admin_departement_index'
-                            ],
-                            [
-                                'name' => 'New',
-                                'path' => 'admin_departement_new'
-                            ]
-                        ]
-                    ],
-                    [
-                        'name' => 'Filiere',
-                        'icon' => '',
-                        'links' =>
+                            'name' => 'Formations',
+                            'path' => 'admin_formation_index'
+                        ],
                         [
-                            [
-                                'name' => 'Filieres',
-                                'path' => 'admin_filiere_index'
-                            ],
-                            [
-                                'name' => 'New',
-                                'path' => 'admin_filiere_new'
-                            ]
-                        ]
-                    ],
-                    [
-                        'name' => 'user',
-                        'icon' => 'fas fa-users',
-                        'links' => [
-                            [
-                                'name' => $this->translator->trans('Users'),
-                                'path' => 'user_index',
-                            ],
-                            [
-                                'name' => $this->translator->trans('New'),
-                                'path' => 'user_new',
-                            ],
+                            'name' => 'New',
+                            'path' => 'admin_formation_new'
                         ]
                     ]
+                ],
+                [
+                    'name' => 'Departement',
+                    'links' => [
+                        [
+                            'name' => 'Departements',
+                            'path' => 'admin_departement_index'
+                        ],
+                        [
+                            'name' => 'New',
+                            'path' => 'admin_departement_new'
+                        ]
+                    ]
+                ],
+                [
+                    'name' => 'Filiere',
+                    'icon' => '',
+                    'links' =>
+                    [
+                        [
+                            'name' => 'Filieres',
+                            'path' => 'admin_filiere_index'
+                        ],
+                        [
+                            'name' => 'New',
+                            'path' => 'admin_filiere_new'
+                        ]
+                    ]
+                ],
+                [
+                    'name' => 'user',
+                    'icon' => 'fas fa-users',
+                    'links' => [
+                        [
+                            'name' => $this->translator->trans('Users'),
+                            'path' => 'user_index',
+                        ],
+                        [
+                            'name' => $this->translator->trans('New'),
+                            'path' => 'user_new',
+                        ],
+                    ]
+                ]
             ]
         ];
     }

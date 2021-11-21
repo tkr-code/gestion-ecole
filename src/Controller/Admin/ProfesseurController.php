@@ -3,8 +3,11 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Professeur;
+use App\Entity\User;
 use App\Form\ProfesseurType;
+use App\Form\UserType;
 use App\Repository\ProfesseurRepository;
+use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -19,10 +22,10 @@ class ProfesseurController extends AbstractController
     /**
      * @Route("/", name="admin_professeur_index", methods={"GET"})
      */
-    public function index(ProfesseurRepository $professeurRepository): Response
+    public function index(ProfesseurRepository $professeurRepository, UserRepository $userRepository): Response
     {
         return $this->render('admin/professeur/index.html.twig', [
-            'professeurs' => $professeurRepository->findAll(),
+            'professeurs' =>$userRepository->professeurs(),
             'parent_page'=>$this->parent_page
         ]);
     }
@@ -32,42 +35,47 @@ class ProfesseurController extends AbstractController
      */
     public function new(Request $request): Response
     {
-        $professeur = new Professeur();
-        $form = $this->createForm(ProfesseurType::class, $professeur);
+        $user = new User();
+        $form = $this->createForm(ProfesseurType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $user->setRoles(['ROLE_PROFESSEUR']);
+            $professeur = new Professeur();
+            $professeur->setTitre($form->get('titre')->getData());
+            $user->setProfesseur($professeur);
             $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($professeur);
+            $entityManager->persist($user);
             $entityManager->flush();
-
+            $this->addFlash('success','Professeur enregistré');
             return $this->redirectToRoute('admin_professeur_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('admin/professeur/new.html.twig', [
-            'professeur' => $professeur,
+            'professeur' => $user,
             'form' => $form,
             'parent_page'=>$this->parent_page
         ]);
     }
 
-    /**
-     * @Route("/{id}", name="admin_professeur_show", methods={"GET"})
-     */
-    public function show(Professeur $professeur): Response
-    {
-        return $this->render('admin/professeur/show.html.twig', [
-            'professeur' => $professeur,
-            'parent_page'=>$this->parent_page
-        ]);
-    }
+    // /**
+    //  * @Route("/{id}", name="admin_professeur_show", methods={"GET"})
+    //  */
+    // public function show(Professeur $professeur,UserRepository $userRepository): Response
+    // {
+    //     $professeur = $userRepository->professeurs($professeur);
+    //     return $this->render('admin/professeur/show.html.twig', [
+    //         'user' => $professeur,
+    //         'parent_page'=>$this->parent_page
+    //     ]);
+    // }
 
     /**
      * @Route("/{id}/edit", name="admin_professeur_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request, Professeur $professeur): Response
+    public function edit(Request $request, User $user): Response
     {
-        $form = $this->createForm(ProfesseurType::class, $professeur);
+        $form = $this->createForm(ProfesseurType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -77,7 +85,7 @@ class ProfesseurController extends AbstractController
         }
 
         return $this->renderForm('admin/professeur/edit.html.twig', [
-            'professeur' => $professeur,
+            'professeur' => $user,
             'form' => $form,
             'parent_page'=>$this->parent_page
         ]);

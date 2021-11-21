@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Cour{% endblock %}
+
+{% block body %}
+    <h1>Edit Cour</h1>
+
+    {{ include('admin/cour/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('admin_cour_index') }}">back to list</a>
+
+    {{ include('admin/cour/_delete_form.html.twig') }}
+{% endblock %}

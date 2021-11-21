@@ -3,6 +3,7 @@
 {% import "macros/links.html.twig" as links %}
 {% import "macros/alertes.html.twig" as alertes %}
 {% import "macros/etats.html.twig" as etats %}
+{% import "macros/breadcrumb.html.twig" as breadcrumb %}
 {% block title %}Formations{% endblock %}
 
 {% block head %}
@@ -16,7 +17,9 @@
 {% block javascripts %}
     {{ dataTable.script('#table-1') }}
 {% endblock %}
-
+{% block breadcrumb %}
+    {{ breadcrumb.breadcrumb('Formations') }}
+{% endblock %}
 {% block body %}
 {% for item in app.flashes('success') %}
     {{ alertes.alert(item,'success')}}

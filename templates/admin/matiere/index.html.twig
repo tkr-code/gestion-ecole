@@ -1,5 +1,8 @@
-{% import "macros/dataTable.html.twig" as dataTable %}
 {% extends 'admin/base.html.twig' %} 
+{% import "macros/dataTable.html.twig" as dataTable %}
+{% import "macros/links.html.twig" as links %}
+{% import "macros/breadcrumb.html.twig" as breadcrumb %}
+{% import "macros/alertes.html.twig" as alertes %}
 
 {% block title %}
 Matieres
@@ -16,9 +19,14 @@ Matieres
 {% block javascripts %}
 {{ dataTable.script('#table-1') }} 
 {% endblock %}
-
+{% block breadcrumb %}
+    {{ breadcrumb.breadcrumb('Matières')}}
+{% endblock %}
 {% block body %}
 
+{% for item in app.flashes('success') %}    
+    {{ alertes.alert(item,'success')}}
+{% endfor %}
 <div class="card card-outline card-primary">
 
     <div class="card-header">
@@ -27,7 +35,7 @@ Matieres
     <div class="card-body">
         <div class="row mb-3">
             <div class="col">
-                <a href="{{ path('admin_matiere_new') }}" class="btn btn-primary">Create new</a>
+                {{ links.new(path('admin_matiere_new'))}}
             </div>
         </div>
         <table class="table" id="table-1">
@@ -47,8 +55,10 @@ Matieres
                     <td>{{ matiere.designation }}</td>
                     <td>{{ matiere.createdAt ? matiere.createdAt|date_format_fr : '' }}</td>
                     <td>
-                        <a href="{{ path('admin_matiere_show', {'id': matiere.id}) }}" class="btn btn-dark"><i class="fas fa-eye"></i></a>
-                        <a href="{{ path('admin_matiere_edit', {'id': matiere.id}) }}" class="btn btn-success"><i class="fas fa-edit"></i></a>
+                        <div class="btn-group">
+                        {{ links.show(path('admin_matiere_show', {'id': matiere.id})) }}
+                        {{ links.edit(path('admin_matiere_edit', {'id': matiere.id})) }}
+                        </div>
                     </td>
                 </tr>
                 {% else %}

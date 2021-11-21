@@ -1,0 +1,9 @@
+{% import "macros/buttons.html.twig" as buttons %}
+{% import "macros/links.html.twig" as links %}
+{{ form_start(form) }}
+    {{ form_widget(form) }}
+    <div class="btn-group">
+        {{ links.back(path('admin_salle_index'))}}
+        {{ buttons.add() }}
+    </div>
+{{ form_end(form) }}

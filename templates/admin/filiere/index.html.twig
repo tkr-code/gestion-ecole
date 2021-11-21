@@ -2,18 +2,18 @@
 {% import "macros/dataTable.html.twig" as dataTable %}
 {% import "macros/links.html.twig" as link %}
 
-{% block head %} 
-{{ dataTable.css() }} 
-{% endblock %} 
+{% block head %}
+{{ dataTable.css() }}
+{% endblock %}
 
-{% block foot %} 
-    {{ dataTable.js() }} 
-{% endblock %} 
-{% block javascripts %} 
-    {{ dataTable.script("#table-1") }} 
-{% endblock %} 
+{% block foot %}
+{{ dataTable.js() }}
+{% endblock %}
+{% block javascripts %}
+{{ dataTable.script("#table-1") }}
+{% endblock %}
 
-{% block title %} Filiere {% endblock %} 
+{% block title %} Filiere {% endblock %}
 {% block body %}
 <div class="card card-outline card-primary mb-10">
     <div class="card-header">
@@ -30,7 +30,6 @@
             </div>
         </div>
         {% if filieres %}
-
         <table class="table" id="table-1">
             <thead>
                 <tr>
@@ -44,14 +43,13 @@
                         Options
                     </th>
                     <th>
-                        Departement Appartenance
+                        Departement
                     </th>
                     <th>
                         Created at
                     </th>
                     <th>
                         actions
-
 
                     </th>
                 </tr>

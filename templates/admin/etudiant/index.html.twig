@@ -1,0 +1,46 @@
+{% extends 'admin/base.html.twig' %}
+{% import "macros/links.html.twig" as name %}
+
+{% block title %}Etudiants{% endblock %}
+
+{% block body %}
+<div class="card">
+    <div class="card-header">
+        <h3>Etudiants</h3>
+    </div>
+    <div class="card-body">
+        <div class="btn-group">
+            <a href="{{ path('admin_etudiant_new') }}" class="btn btn-primary">Create new</a>
+        </div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Matricule</th>
+                    <th>Occupation</th>
+                    <th>Signature</th>
+                    <th>actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for etudiant in etudiants %}
+                <tr>
+                    <td>{{ etudiant.matricule }}</td>
+                    <td>{{ etudiant.occupation }}</td>
+                    <td>{{ etudiant.signature }}</td>
+                    <td>
+                        <div class="btn-group">
+                        {{ links.show(path('admin_etudiant_show', {'id': etudiant.id}) ) }}
+                        {{ links.edit(path('admin_etudiant_edit', {'id': etudiant.id}) ) }}
+                        </div>
+                    </td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="5">no records found</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

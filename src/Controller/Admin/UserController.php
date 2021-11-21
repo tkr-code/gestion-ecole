@@ -13,9 +13,6 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
-/**
- * @Route("admin/user")
- */
 class UserController extends AbstractController
 {
     private $translator;
@@ -26,7 +23,7 @@ class UserController extends AbstractController
         $this->translator = $translatorInterface;
     }
     /**
-     * @Route("/", name="user_index", methods={"GET"})
+     * @Route("admin/user/", name="user_index", methods={"GET"})
      */
     public function index(UserRepository $userRepository): Response
     {
@@ -37,7 +34,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="user_new", methods={"GET","POST"})
+     * @Route("admin/user/new", name="user_new", methods={"GET","POST"})
      */
     public function new(Request $request, UserPasswordHasherInterface $userPasswordHasherInterface): Response
     {
@@ -69,7 +66,8 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="user_show", methods={"GET"})
+     * @Route("admin/professeur/{id}", name="admin_professeur_show", methods={"GET"})
+     * @Route("admin/user/{id}", name="user_show", methods={"GET"})
      */
     public function show(User $user): Response
     {

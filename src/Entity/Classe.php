@@ -28,11 +28,6 @@ class Classe
     private $code;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $salle;
-
-    /**
      * @ORM\ManyToOne(targetEntity=Filiere::class, inversedBy="classes")
      */
     private $filiere;
@@ -47,6 +42,16 @@ class Classe
      */
     private $designation;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Salle::class, inversedBy="classes")
+     */
+    private $salles;
+
+    public function __construct()
+    {
+        $this->salles = new ArrayCollection();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -60,18 +65,6 @@ class Classe
     public function setCode(string $code): self
     {
         $this->code = $code;
-
-        return $this;
-    }
-
-    public function getSalle(): ?string
-    {
-        return $this->salle;
-    }
-
-    public function setSalle(string $salle): self
-    {
-        $this->salle = $salle;
 
         return $this;
     }
@@ -108,6 +101,30 @@ class Classe
     public function setDesignation(string $designation): self
     {
         $this->designation = $designation;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Salle[]
+     */
+    public function getSalles(): Collection
+    {
+        return $this->salles;
+    }
+
+    public function addSalle(Salle $salle): self
+    {
+        if (!$this->salles->contains($salle)) {
+            $this->salles[] = $salle;
+        }
+
+        return $this;
+    }
+
+    public function removeSalle(Salle $salle): self
+    {
+        $this->salles->removeElement($salle);
 
         return $this;
     }

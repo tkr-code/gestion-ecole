@@ -1,0 +1,62 @@
+{% extends 'admin/base.html.twig' %}
+{% import "macros/dataTable.html.twig" as dataTable %}
+{% import "macros/links.html.twig" as links %}
+{% import "macros/alertes.html.twig" as alertes %}
+{% import "macros/breadcrumb.html.twig" as breadcrumb %}
+
+{% block title %}Salles{% endblock %}
+{% block head %}
+    {{ dataTable.css() }}
+{% endblock %}
+
+{% block foot %}
+    {{ dataTable.js() }}
+{% endblock %}
+{% block javascripts %}
+    {{ dataTable.script('#table-1') }}
+{% endblock %}
+{% block breadcrumb %}
+    {{ breadcrumb.breadcrumb('Salles')}}
+{% endblock %}
+{% block body %}
+{% for item in app.flashes('success') %}
+    {{ alertes.alert(item,'success')}}
+{% endfor %}
+<div class="card card-outline card-primary">
+<div class="card-header">
+    <h3>Salles</h3>
+</div>
+<div class="card-body">
+    <div class="btn-group">
+       <a class="btn btn-primary" href="{{ path('admin_salle_new') }}">Create new</a>
+    </div>
+    <table id="table-1" class="table">
+        <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Numero</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for salle in salles %}
+            <tr>
+                <td>{{ salle.nom }}</td>
+                <td>{{ salle.numero }}</td>
+                <td>
+                    <div class="btn-group">
+                        {{ links.show(path('admin_salle_show', {'id': salle.id})) }}
+                        {{ links.edit(path('admin_salle_edit', {'id': salle.id})) }}
+                    </div>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+</div>
+{% endblock %}

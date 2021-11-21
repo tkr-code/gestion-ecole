@@ -1,0 +1,14 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}New Etudiant{% endblock %}
+
+{% block body %}
+<div class="card">
+    <div class="card-header">
+    <h3>Create new Etudiant</h3>
+    </div>
+    <div class="card-body">
+        {{ include('admin/etudiant/_form.html.twig') }}
+    </div>
+</div>
+{% endblock %}

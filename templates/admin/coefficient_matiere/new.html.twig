@@ -1,0 +1,14 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}New CoefficientMatiere{% endblock %}
+
+{% block body %}
+	<div class="card card-outline card-primary">
+		<div class="card-header">
+			<h3>Create new CoefficientMatiere</h3>
+		</div>
+		<div class="card-body">
+            {{ include('admin/coefficient_matiere/_form.html.twig') }}
+		</div>
+	</div>
+{% endblock %}

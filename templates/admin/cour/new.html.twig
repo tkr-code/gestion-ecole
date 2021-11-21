@@ -1,0 +1,15 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}New Cour{% endblock %}
+
+{% block body %}\
+<div class="card card-outline card-primary">
+    <div class="card-header">
+        <h3>Create new Cour</h3>
+    </div>
+    <div class="card-body">
+        {{ include('admin/cour/_form.html.twig') }}
+    </div>
+</div>
+
+{% endblock %}

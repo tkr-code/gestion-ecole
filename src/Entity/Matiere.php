@@ -39,9 +39,15 @@ class Matiere
      */
     private $created_at;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Professeur::class, mappedBy="matieres")
+     */
+    private $professeurs;
+
     public function __construct()
     {
         $this->created_at = new \DateTime();
+        $this->professeurs = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -81,6 +87,33 @@ class Matiere
     public function setCreatedAt(\DateTimeInterface $created_at): self
     {
         $this->created_at = $created_at;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Professeur[]
+     */
+    public function getProfesseurs(): Collection
+    {
+        return $this->professeurs;
+    }
+
+    public function addProfesseur(Professeur $professeur): self
+    {
+        if (!$this->professeurs->contains($professeur)) {
+            $this->professeurs[] = $professeur;
+            $professeur->addMatiere($this);
+        }
+
+        return $this;
+    }
+
+    public function removeProfesseur(Professeur $professeur): self
+    {
+        if ($this->professeurs->removeElement($professeur)) {
+            $professeur->removeMatiere($this);
+        }
 
         return $this;
     }

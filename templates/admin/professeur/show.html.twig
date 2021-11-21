@@ -1,26 +1,33 @@
-{% extends 'base.html.twig' %}
+{% extends 'admin/base.html.twig' %}
 
 {% block title %}Professeur{% endblock %}
 
 {% block body %}
-    <h1>Professeur</h1>
-
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ professeur.id }}</td>
-            </tr>
-            <tr>
-                <th>Titre</th>
-                <td>{{ professeur.titre }}</td>
-            </tr>
-        </tbody>
-    </table>
-
-    <a href="{{ path('admin_professeur_index') }}">back to list</a>
-
-    <a href="{{ path('admin_professeur_edit', {'id': professeur.id}) }}">edit</a>
-
-    {{ include('admin/professeur/_delete_form.html.twig') }}
+<div class="card">
+    <div class="card-header">
+        <h3 class="card-title">
+            <i class="fas fa-text-width"></i>
+            Professeur
+        </h3>
+    </div>
+    <!-- /.card-header -->
+    <div class="card-body">
+        <dl class="row">
+        <pre>
+            {{ dump(user) }}
+        </pre>
+            {# <dt class="col-sm-4">Porofesseur id</dt>
+            <dd class="col-sm-8">{{ user.professeur.id }}</dd>
+            <dt class="col-sm-4">Nom et prenom</dt>
+            <dd class="col-sm-8">{{ user.personne.fullName }}</dd>
+            <dt class="col-sm-4">Titre</dt>
+            <dd class="col-sm-8">{{ user.professeur.titre }}</dd> #}
+        </dl>
+        <div class="btn-group">
+            <a class="btn btn-dark" href="{{ path('admin_professeur_index') }}">back to list</a>
+            {# <a class="btn btn-primary" href="{{ path('admin_professeur_edit', {'id': user.professeur.id}) }}">edit</a> #}
+        </div>
+    </div>
+    <!-- /.card-body -->
+</div>
 {% endblock %}

@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit CoefficientMatiere{% endblock %}
+
+{% block body %}
+    <h1>Edit CoefficientMatiere</h1>
+
+    {{ include('admin/coefficient_matiere/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('admin_coefficient_matiere_index') }}">back to list</a>
+
+    {{ include('admin/coefficient_matiere/_delete_form.html.twig') }}
+{% endblock %}

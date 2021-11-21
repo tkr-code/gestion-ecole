@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Salle{% endblock %}
+
+{% block body %}
+    <h1>Salle</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ salle.id }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ salle.nom }}</td>
+            </tr>
+            <tr>
+                <th>Numero</th>
+                <td>{{ salle.numero }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('admin_salle_index') }}">back to list</a>
+
+    <a href="{{ path('admin_salle_edit', {'id': salle.id}) }}">edit</a>
+
+    {{ include('admin/salle/_delete_form.html.twig') }}
+{% endblock %}

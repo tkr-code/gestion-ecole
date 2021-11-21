@@ -1,0 +1,41 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Coefficient Matiere {% endblock %}
+
+{% block body %}
+<div class="card">
+    <div class="card-header">
+        <h3>Coefficient Matiere</h3>
+    </div>
+    <div class="card-body">
+        <div class="btn-group">
+            <a class="btn btn-primary" href="{{ path('admin_coefficient_matiere_new') }}">Create new</a>
+        </div>
+        <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Valeur</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for coefficient_matiere in coefficient_matieres %}
+            <tr>
+                <td>{{ coefficient_matiere.id }}</td>
+                <td>{{ coefficient_matiere.valeur }}</td>
+                <td>
+                    <a href="{{ path('admin_coefficient_matiere_show', {'id': coefficient_matiere.id}) }}">show</a>
+                    <a href="{{ path('admin_coefficient_matiere_edit', {'id': coefficient_matiere.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    </div>
+</div>
+{% endblock %}

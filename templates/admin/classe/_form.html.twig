@@ -1,7 +1,10 @@
+{% import "macros/links.html.twig" as links %}
+{% import "macros/buttons.html.twig" as buttons %}
+
 {{ form_start(form) }}
     {{ form_widget(form) }}
     <div class="btn-group">
-        <a href="{{ path('admin_classe_index') }}">back to list</a>
-        <button class="btn">{{ button_label|default('Save') }}</button>
+    {{ links.back(path('admin_classe_index'))}}
+    {{ buttons.add()}}
     </div>
 {{ form_end(form) }}

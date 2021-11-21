@@ -15,6 +15,7 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class MatiereController extends AbstractController
 {
+    private $parent_page = 'Matière';
     /**
      * @Route("/", name="admin_matiere_index", methods={"GET"})
      */
@@ -22,6 +23,7 @@ class MatiereController extends AbstractController
     {
         return $this->render('admin/matiere/index.html.twig', [
             'matieres' => $matiereRepository->findAll(),
+            'parent_page'=>$this->parent_page
         ]);
     }
 
@@ -45,6 +47,7 @@ class MatiereController extends AbstractController
         return $this->renderForm('admin/matiere/new.html.twig', [
             'matiere' => $matiere,
             'form' => $form,
+            'parent_page'=>$this->parent_page
         ]);
     }
 
@@ -55,6 +58,7 @@ class MatiereController extends AbstractController
     {
         return $this->render('admin/matiere/show.html.twig', [
             'matiere' => $matiere,
+            'parent_page'=>$this->parent_page
         ]);
     }
 

@@ -1,0 +1,36 @@
+{% extends 'admin/base.html.twig' %}
+{% import "macros/breadcrumb.html.twig" as breadcrumb %}
+
+{% block title %}Inscription!{% endblock %}
+{% block breadcrumb %}
+{{ breadcrumb.breadcrumb('Inscription') }}
+{% endblock %}
+{% block body %}
+<div class="card card-outline card-warning ">
+    <div class="card-header">
+        <h3>Formulaire d'inscription</h3>
+    </div>
+    <div class="card-body">
+        <h3 class="bg-light p-2 text-center">Identité du candidat</h3>
+        <div class="row">
+            <div class="col-md-12">
+            </div>
+        </div>
+        <h3 class="bg-light p-2 text-center">Formation</h3>
+        <div class="row">
+            <div class="col-md-12">
+            </div>
+        </div>
+        <h3 class="bg-light p-2 text-center">Parents</h3>
+        <div class="row">
+            <div class="col-md-12">
+            </div>
+        </div>
+        <h3 class="bg-light p-2 text-center">Personne à joindre</h3>
+        <div class="row">
+            <div class="col-md-12">
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
