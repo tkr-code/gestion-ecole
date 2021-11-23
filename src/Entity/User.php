@@ -16,6 +16,10 @@ use Symfony\Component\Security\Core\User\UserInterface;
  */
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
+    const  etats =[
+            'Activer'=>'Activer',
+            'Désactiver'=>'Désactiver'];
+    
     /**
      * @ORM\Id
      * @ORM\GeneratedValue

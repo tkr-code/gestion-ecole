@@ -10,7 +10,7 @@ use App\Entity\OptionFiliere;
 use App\Form\EditOptionFiliereType;
 use App\Form\FiliereOptionType;
 use App\Form\OptionFiliereType;
-use App\Form\MonChoixFiliereType;
+use App\Form\MonChoixType;
 use App\Repository\FiliereRepository;
 use App\Repository\DepartementRepository;
 use App\Repository\OptionFiliereRepository;
@@ -191,13 +191,13 @@ class FiliereController extends AbstractController
         }
         //formulaire de creation ou ajout d'une option bien que la filiere est deja cree
         $choix = new MonChoix();
-        $optFilForm = $this->createForm(MonChoixFiliereType::class, $choix);
+        $optFilForm = $this->createForm(MonChoixType::class, $choix);
 
         $optFilForm->handleRequest($request);
         if ($optFilForm->isSubmitted() && $optFilForm->isValid()) {
             //dd($request);
             //on verifie d'abord si l'ajout d'une option a ete validé
-            $rpOption = $request->request->get("mon_choix_filiere")["Options"];
+            $rpOption = $request->request->get("mon_choix")["Options"];
             if ($rpOption == "oui") {
                 //pour la nvelle option filiere nous avons un tableau dimensionnel il faut les parcourir
                 $codOpt = $request->request->get("codeOption"); //ce sont des tableaux

@@ -4,32 +4,418 @@
 
 {% block title %}
     Edit ResponsableDepartement
+                                                                                                                                
+                                                                                                                            
+                                                                                                                        
+                                                                                                                    
+                                                                                                                
+                                                                                                            
+                                                                                                        
+                                                                                                    
+                                                                                                
+                                                                                            
+                                                                                        
+                                                                                    
+                                                                                
+                                                                            
+                                                                        
+                                                                    
+                                                                
+                                                            
+                                                        
+                                                    
+                                                
+                                            
+                                        
+                                    
+                                
+                            
+                        
+                    
+                
+            
         
     
 {% endblock %}
 
 {% block body %}
+
     <div class="card card-outline card-success">
         <div class="card-header">
-            <h3>
-                Edit ResponsableDepartement
+            <h5>
+                Information Personnelle 
+                                                                                                                                                                
+                                                                                                                                            
+                                                                                                                            
+                                                                                                            
+                                                                                            
+                                                                            
+                                                            
                                             
                             
-            </h3>
+            </h5>
         </div>
+        {{ form_start(form) }}
         <div class="card-body">
-            {{ form_start(form) }}
-            {{ form_row(form.date_entre_fonction) }}
-            {{ form_row(form.date_sortie_fonction) }}
-            {{ form_row(form.departement) }}
-            <div class="btn-group">
-                {{ links.back(path('admin_responsable_departement_index')) }}
-                {{ buttons.edit() }}
+            <div class="row">
+                <div class="col-md-6">
+                    {{ form_row(form.personne.nom) }}
+                    {{ form_row(form.personne.prenom) }}
+                    {{ form_row(form.personne.profession) }}
+                    {{ form_row(form.email) }}
+                </div>
+                <div class="col-md-6">
+                    {{ form_row(form.personne.avatar) }}
+                    {{ form_row(form.etat) }}
+                    {{ form_row(form.isVerified) }}
+                </div>
             </div>
-            {{ form_end(form) }}
+            <div class="row">
+                <div class="col-md-4"></div>
+                <div class="col-md-4">
+                    <div class="btn-group">
+                        {{ links.back(path('admin_responsable_departement_index')) }}
+                        {{ buttons.edit() }}
+                    </div>
+                </div>
+                <div class="col-md-4"></div>
+            </div>
 
         </div>
-
+        {{ form_end(form) }}
     </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card card-outline card-success">
+                <div class="card-header">
+                    <h5>
+                        En Fonction Depuis Le : 
+                                                                                                                                                                                                                                                                     
+                                                                                                                                                                                                                                                                    
+                                                                                                                                                                                                                                                
+                                                                                                                                                                                                                        
+                                                                                                                                                                                                
+                                                                                                                                                                        
+                                                                                                                                                
+                                                                                                                        
+                                                                                                
+                                                                        
+                                                
+                        {{ date_entre_fonct ? date_entre_fonct|date_format_fr:'' }}
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div>
+                        <h5>
+                            Entrée en Fonction le : 
+                                                                                                                                                                                                                                                                                                                                                                                                                                    
+                                                                                                                                                                                                                                                                                                                                                                                                    
+                                                                                                                                                                                                                                                                                                                                                                            
+                                                                                                                                                                                                                                                                                                                                                
+                                                                                                                                                                                                                                                                                                                    
+                                                                                                                                                                                                                                                                                        
+                                                                                                                                                                                                                                                            
+                                                                                                                                                                                                                                
+                                                                                                                                                                                                    
+                                                                                                                                                                        
+                                                                                                                                            
+                                                                                                                
+                                                                                    
+                                                        
+                            <span style="color:#1109FF;text-transform:capitalize">
+                                {{ date_entre_fonct ? date_entre_fonct|date_format_fr:'' }}
+                            </span>
+                        </h5>
+                    </div>
+                    <div class="">
+                        <h5>
+                            Date Sortie En  Fonction :                                                                                               
+                                                                                                                                            
+                                                                                                                
+                                                                                    
+                                                        
+                            {% if date_sortie_fonct| length != 0 %}
+                                <span style="color:#1109FF;text-transform:capitalize">
+                                    {{ date_sortie_fonct ? date_sortie_fonct|date_format_fr:'' }}
+                                </span>
+                            {% else %}
+                                <span style="color:#1109FF;text-transform:capitalize">
+                                    Toujours En Fonction                                     
+                                                                                                                                                                                
+                                                                                                                                            
+                                                                                                        
+                                                                    
+                                </span>
+                            {% endif %}
 
-{% endblock %}
+                        </h5>
+                    </div>
+                    <br>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h4>
+                                    modifier Date entree fonction ?                                             
+                                                                                                                        
+                                                                                            
+                                                                
+                                </h4>
+                                {{ form_start(formChoix_1) }}
+                                {{ form_row(formChoix_1.Options) }}
+                                {{ form_end(formChoix_1) }}
+
+                                <div id="showDateEntreeFonction">
+                                    {{ form_start(formDateEntreeFonction) }}
+                                    {{ form_row(formDateEntreeFonction.date_entre_fonction) }}
+                                    <div class="btn-group">
+                                        {{ links.back(path('admin_responsable_departement_index')) }}
+                                        {{ buttons.edit() }}
+                                    </div>
+                                    {{ form_end(formDateEntreeFonction) }}
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                            <h4>
+                                modifier Date Sortie fonction ?                                             
+                                                                                    
+                                                        
+                            </h4>
+                            {{ form_start(formChoix_3) }}
+                            {{ form_row(formChoix_3.Options) }}
+                            {{ form_end(formChoix_3) }}
+    
+                            <div id="showDateSortieFonction">
+                                {{ form_start(formDateSortieFonction) }}
+                                {{ form_row(formDateSortieFonction.date_sortie_fonction) }}
+                                <div class="btn-group">
+                                    {{ links.back(path('admin_responsable_departement_index')) }}
+                                    {{ buttons.edit() }}
+                                </div>
+                                {{ form_end(formDateSortieFonction) }}
+                            </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card card-outline card-success">
+                    <div class="card-header">
+                        <h5>
+                            Departement En Charge :   
+                                                                                                                                                                                                                                                                                                                                           
+                                                                                                                                                                                                                                                                                                                    
+                                                                                                                                                                                                                                                                                        
+                                                                                                                                                                                                                                                            
+                                                                                                                                                                                                                                
+                                                                                                                                                                                                    
+                                                                                                                                                                        
+                                                                                                                                            
+                                                                                                                
+                                                                                    
+                                                        
+                            {{ departement }}
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <div>
+                            <h5>
+                                Dirige le departement : 
+                                                                                                                                                                                                                                                                                                                                                          
+                                                                                                                                                                                                                                                                                                                                
+                                                                                                                                                                                                                                                                                                
+                                                                                                                                                                                                                                                                
+                                                                                                                                                                                                                                
+                                                                                                                                                                                                
+                                                                                                                                                                
+                                                                                                                                
+                                                                                                
+                                                                
+                                <span style="color:#1109FF">
+                                    {{ departement }}
+                                </span>
+                            </h5>
+                        </div>
+                        <br>
+                            <h3>
+                                Changez de departement au responsable ?
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+                                                                                                                                                                                                                                                                                                                                                                                                                                    
+                                                                                                                                                                                                                                                                                                                                                                                                            
+                                                                                                                                                                                                                                                                                                                                                                                    
+                                                                                                                                                                                                                                                                                                                                                        
+                                                                                                                                                                                                                                                                                                                            
+                                                                                                                                                                                                                                                                                            
+                                                                                                                                                                                                                                                            
+                                                                                                                                                                                                                            
+                                                                                                                                                                                            
+                                                                                                                                                            
+                                                                                                                            
+                                                                                            
+                                                            
+                            </h3>
+                            {{ form_start(formChoix) }}
+                            {{ form_row(formChoix.Options) }}
+                            {{ form_end(formChoix) }}
+
+                            <div id="showDepartement">
+                                {{ form_start(formDepartement) }}
+                                {{ form_row(formDepartement.designation) }}
+                                <div class="btn-group">
+                                    {{ links.back(path('admin_responsable_departement_index')) }}
+                                    {{ buttons.edit() }}
+                                </div>
+                                {{ form_end(formDepartement) }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card card-outline card-success">
+                        <div class="card-header">
+                            Securite du compte    
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+                                                                                                                                                                                                                                                                                                                                                                                                                                            
+                                                                                                                                                                                                                                                                                                                                                                                                                    
+                                                                                                                                                                                                                                                                                                                                                                                                
+                                                                                                                                                                                                                                                                                                                                                                            
+                                                                                                                                                                                                                                                                                                                                                        
+                                                                                                                                                                                                                                                                                                                                    
+                                                                                                                                                                                                                                                                                                            
+                                                                                                                                                                                                                                                                                    
+                                                                                                                                                                                                                                                        
+                                                                                                                                                                                                                            
+                                                                                                                                                                                                
+                                                                                                                                                                    
+                                                                                                                                        
+                                                                                                            
+                                                                                
+                                                    
+                        </div>
+                        <div class="card-body">
+                            <h3>
+                                Voulez-vous modifier le mot de passe ?
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+                                                                                                                                                                                                                                                                                                                                                                                                                                    
+                                                                                                                                                                                                                                                                                                                                                                                                            
+                                                                                                                                                                                                                                                                                                                                                                                    
+                                                                                                                                                                                                                                                                                                                                                        
+                                                                                                                                                                                                                                                                                                                            
+                                                                                                                                                                                                                                                                                            
+                                                                                                                                                                                                                                                            
+                                                                                                                                                                                                                            
+                                                                                                                                                                                            
+                                                                                                                                                            
+                                                                                                                            
+                                                                                            
+                                                            
+                            </h3>
+                            {{ form_start(formChoix_2) }}
+                            {{ form_row(formChoix_2.Options) }}
+                            {{ form_end(formChoix_2) }}
+
+                            <div id="showPassword">
+                                {{ form_start(formPassword) }}
+                                {{ form_row(formPassword.password) }}
+                                <div class="btn-group">
+                                    {{ links.back(path('admin_responsable_departement_index')) }}
+                                    {{ buttons.edit() }}
+                                </div>
+                                {{ form_end(formPassword) }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card card-outline card-success">
+                        <div class="card-header">
+                            A completer       
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+                                                                                                                                                                                                                                                                                                                                                                                                                                                
+                                                                                                                                                                                                                                                                                                                                                                                                                    
+                                                                                                                                                                                                                                                                                                                                                                                                
+                                                                                                                                                                                                                                                                                                                                                                            
+                                                                                                                                                                                                                                                                                                                                                        
+                                                                                                                                                                                                                                                                                                                                    
+                                                                                                                                                                                                                                                                                                            
+                                                                                                                                                                                                                                                                                    
+                                                                                                                                                                                                                                                        
+                                                                                                                                                                                                                            
+                                                                                                                                                                                                
+                                                                                                                                                                    
+                                                                                                                                        
+                                                                                                            
+                                                                                
+                                                    
+                        </div>
+                        <div class="card-body"></div>
+                    </div>
+                </div>
+            </div>
+        {% endblock %}
+        {% block javascripts %}
+            <script>
+    $(document).ready(function(){
+        $("#showDepartement").hide();
+
+        $("#mon_choix_Options_0").click(function(){
+            $("#showDepartement").show(500);
+
+        })
+
+        $("#mon_choix_Options_1").click(function(){
+            $("#showDepartement").hide(500);
+
+        })
+
+        $("#showDateEntreeFonction").hide();
+
+        $("#mon_choix_1_Options_0").click(function(){
+            $("#showDateEntreeFonction").show(500);
+
+        })
+
+        $("#mon_choix_1_Options_1").click(function(){
+            $("#showDateEntreeFonction").hide(500);
+
+        })
+        
+        $("#showDateSortieFonction").hide();
+
+        $("#mon_choix_3_Options_0").click(function(){
+            $("#showDateSortieFonction").show(500);
+
+        })
+
+        $("#mon_choix_3_Options_1").click(function(){
+            $("#showDateSortieFonction").hide(500);
+
+        })
+        
+        $("#showPassword").hide();
+
+        $("#mon_choix_2_Options_0").click(function(){
+            $("#showPassword").show(500);
+
+        })
+
+        $("#mon_choix_2_Options_1").click(function(){
+            $("#showPassword").hide(500);
+
+        })
+
+    })
+</script>
+        {% endblock %}
+        

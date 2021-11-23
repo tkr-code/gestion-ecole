@@ -1,38 +1,130 @@
-{% extends 'base.html.twig' %}
+{% extends 'admin/base.html.twig' %}
+{% import "macros/links.html.twig" as links %}
 
-{% block title %}User{% endblock %}
+{% block title %}
+    User
+                    
+                
+            
+        
+    
+{% endblock %}
 
 {% block body %}
-    <h1>User</h1>
+    <div class="card card-outline card-lightblue">
+        <div class="card-header">
+            <h3>
+            Responsable Departement : <i> {{user.responsable.departement.designation}}</i>              
+            </h3>
+        </div>
+        <div class="card-body">
+        
+            <table class="table">
+                <tbody>
+                    <tr>
+                        <th>
+                            Prenom
+                                                    
+                        </th>
+                        <td>
+                            {{ user.personne.prenom }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            Nom
+                                                    
+                        </th>
+                        <td>
+                            {{ user.personne.nom }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            Profession                         
+                                                                                         
+                        </th>
+                        <td>
+                            {{ user.personne.profession }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            Email                         
+                                                                                
+                                                    
+                        </th>
+                        <td>
+                            {{ user.email }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            Etat du compte                         
+                                                                                
+                                                    
+                        </th>
+                        <td>
+                            {{ user.etat }}
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <th>
+                            Roles                         
+                                                                                
+                                                    
+                        </th>
+                        <td>
+                            {% for role in user.roles %}
+                            {% if role == "ROLE_RESPONSABLE_DEPARTEMENT" %}
+                            Responsable
+                            {% elseif role == "ROLE_ADMIN" %}
+                            Administrateur
+                            {% elseif role == "ROLE_ETUDIANT" %}
+                            Etudiant
+                            {% else %}
+                                Utilisateur
+                            {% endif %}
+                                
+                            {% endfor %}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            Departement En Charge                         
+                                                                                
+                                                    
+                        </th>
+                        <td>
+                            {{ user.responsable.departement.designation }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            Ajouté Le                        
+                                                                                
+                                                    
+                        </th>
+                        <td>
+                            {{ user.personne.getCreatedAt ? user.personne.getCreatedAt|date_format_fr: '' }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            IsVerified                                                         
+                        </th>
+                        <td>
+                            {{ user.isVerified ? 'Yes' : 'No' }}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="btn-group">
+                {{ links.back(path('admin_responsable_departement_index')) }}
+                {{ links.edit(path('admin_responsable_departement_edit', {'id': user.id})) }}
+            </div>
+        </div>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ user.id }}</td>
-            </tr>
-            <tr>
-                <th>Email</th>
-                <td>{{ user.email }}</td>
-            </tr>
-            <tr>
-                <th>Roles</th>
-                <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
-            </tr>
-            <tr>
-                <th>Password</th>
-                <td>{{ user.password }}</td>
-            </tr>
-            <tr>
-                <th>IsVerified</th>
-                <td>{{ user.isVerified ? 'Yes' : 'No' }}</td>
-            </tr>
-        </tbody>
-    </table>
-
-    <a href="{{ path('user_index') }}">back to list</a>
-
-    <a href="{{ path('user_edit', {'id': user.id}) }}">edit</a>
-
-    {{ include('user/_delete_form.html.twig') }}
+    </div>
 {% endblock %}

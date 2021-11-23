@@ -16,7 +16,7 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 
-class ResponsableDepartementType extends AbstractType
+class ResponsableDepartementType1 extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
@@ -33,45 +33,15 @@ class ResponsableDepartementType extends AbstractType
                 EmailType::class,
 
             )
-            ->add('password',PasswordType::class,[
-                'attr'=>[
-                    'placeholder'=>'Mot de passe'
-                ]
-            ])
-
-            ->add(
-                'date_entre_fonction',
-                DateType::class,
-                [
-                    'widget' => 'single_text',
-                    'mapped'=>false
-                ]
-            )
-            ->add(
-                'date_sortie_fonction',
-                DateType::class,
-                [
-                    'widget' => 'single_text',
-                    'required' => false,
-                    'mapped'=>false
-                ]
-            )
-            ->add(
-                'departement',
-                EntityType::class,
-                [
-                    'class' => Departement::class,
-                    'choice_label' => 'designation',
-                    'placeholder' => 'choisir le departement à diriger',
-                    'mapped'=>false
-                ]
-            )
+            
             ->add('etat',ChoiceType::class,[
                 'choices'=>User::etats
             ])
+            
             ->add('isVerified')
             ;
     }
+    
 
     public function configureOptions(OptionsResolver $resolver): void
     {
