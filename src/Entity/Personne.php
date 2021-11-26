@@ -47,7 +47,7 @@ class Personne
     private $created_at;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Adresse::class, inversedBy="personnes")
+     * @ORM\ManyToOne(targetEntity=Adresse::class, inversedBy="personnes",cascade={"persist"})
      */
     private $adresse;
 
@@ -130,5 +130,9 @@ class Personne
 
     public function fullName(){
         return ucfirst($this->getPrenom()).' '.ucfirst($this->getNom());
+    }
+    public function __toString()
+    {
+        return $this;
     }
 }

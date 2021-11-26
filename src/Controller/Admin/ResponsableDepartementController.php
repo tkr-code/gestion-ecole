@@ -60,6 +60,7 @@ class ResponsableDepartementController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            // dd($user);
             $user->setRoles(["ROLE_RESPONSABLE_DEPARTEMENT"])
                 ->setPassword($hash->hashPassword($user, $user->getPassword()));
             $respo = new ResponsableDepartement();
@@ -96,7 +97,7 @@ class ResponsableDepartementController extends AbstractController
     /**
      * @Route("/{id}/edit", name="admin_responsable_departement_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request, User $user, DepartementRepository $d): Response
+    public function edit(Request $request, User $user, DepartementRepository $d, UserPasswordHasherInterface $hash): Response
     {
         $depart = $user->getResponsable()->getDepartement()->getDesignation();
         $date_entre_fonct = $user->getResponsable()->getDateEntreFonction();
@@ -108,8 +109,6 @@ class ResponsableDepartementController extends AbstractController
 
         $departement = new DepartementChoix();
         $respo = new ResponsableDepartement();
-
-        $formPassword = $this->createForm(PasswordEditType::class);
 
         $formChoix = $this->createForm(MonChoixType::class, $choix);
         $formChoix_1 = $this->createForm(MonChoix_1Type::class, $choix_1);
@@ -135,7 +134,7 @@ class ResponsableDepartementController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
 
-            $this->addFlash('success', 'Modification du responsable reussie');
+            $this->addFlash('success', 'Modification du responsable reussie : Mise à jour des informations personnelles');
 
             return $this->redirectToRoute('admin_responsable_departement_index', [], Response::HTTP_SEE_OTHER);
         }
@@ -146,8 +145,9 @@ class ResponsableDepartementController extends AbstractController
         #concernant le changemet du department qu'il doit diriger
         if ($formDepartement->isSubmitted() && $formDepartement->isValid()) {
             //dump($request->request->get('departement_selection')["designation"]);
+            //dd($user);
             $respo->setDepartement($d->find($request->request->get('departement_selection')["designation"]));
-            $respo->setDateEntreFonction($user->getResponsable()->getDateSortieFonction());
+            $respo->setDateEntreFonction($user->getResponsable()->getDateEntreFonction());
             $respo->setDateSortieFonction($user->getResponsable()->getDateSortieFonction());
             $user->setResponsable($respo);
             //dump($user);
@@ -203,9 +203,25 @@ class ResponsableDepartementController extends AbstractController
 
             $this->addFlash('success', 'Modification du responsable reussie : changement de la date sortie en fonction');
             return $this->redirectToRoute('admin_responsable_departement_index', [], Response::HTTP_SEE_OTHER);
+        }
 
-            //dd($user);
+        #concernant la modification du mot de passe responsable  par l'admin 
+        $formPassword = $this->createForm(PasswordEditType::class);
+        $formPassword->handleRequest($request);
+        if ($formPassword->isSubmitted() && $formPassword->isValid()) {
+            // dump($formPassword->get("password")->getData());
+            // dd($request->request->get("password_edit")["password"]);
 
+
+            if ($request->request->get("password_edit")["password"]["first"] === $request->request->get("password_edit")["password"]["second"]) {
+                $user->setPassword($hash->hashPassword($user, $formPassword->get("password")->getData()));
+
+                $entityManager = $this->getDoctrine()->getManager();
+                $entityManager->persist($user);
+                $entityManager->flush();
+                $this->addFlash('success', 'Modification du responsable reussie : Mise à jour du mot de passe');
+                return $this->redirectToRoute('admin_responsable_departement_index', [], Response::HTTP_SEE_OTHER);
+            }
         }
 
         return $this->renderForm('admin/responsable_departement/edit.html.twig', [

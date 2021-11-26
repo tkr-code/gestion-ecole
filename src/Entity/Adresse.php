@@ -6,7 +6,7 @@ use App\Repository\AdresseRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-
+use Symfony\Component\Validator\Constraints As Assert;
 /**
  * @ORM\Entity(repositoryClass=AdresseRepository::class)
  */
@@ -21,11 +21,14 @@ class Adresse
 
     /**
      * @ORM\Column(type="string", length=255)
+     * 
      */
     private $numero_villa;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotNull
+     * @Assert\NotBlank
      */
     private $quartier;
 
@@ -36,11 +39,15 @@ class Adresse
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank
+     * @Assert\NotNull
      */
     private $pays;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank
+     * @Assert\NotNull
      */
     private $ville;
 

@@ -3,55 +3,13 @@
 {% import "macros/buttons.html.twig" as buttons %}
 
 {% block title %}
-    Edit ResponsableDepartement
-                                                                                                                                
-                                                                                                                            
-                                                                                                                        
-                                                                                                                    
-                                                                                                                
-                                                                                                            
-                                                                                                        
-                                                                                                    
-                                                                                                
-                                                                                            
-                                                                                        
-                                                                                    
-                                                                                
-                                                                            
-                                                                        
-                                                                    
-                                                                
-                                                            
-                                                        
-                                                    
-                                                
-                                            
-                                        
-                                    
-                                
-                            
-                        
-                    
-                
-            
-        
-    
+    Edit ResponsableDepartement                                                                                                             
 {% endblock %}
-
 {% block body %}
-
     <div class="card card-outline card-success">
         <div class="card-header">
             <h5>
-                Information Personnelle 
-                                                                                                                                                                
-                                                                                                                                            
-                                                                                                                            
-                                                                                                            
-                                                                                            
-                                                                            
-                                                            
-                                            
+                Information Personnelle                 
                             
             </h5>
         </div>
@@ -63,11 +21,17 @@
                     {{ form_row(form.personne.prenom) }}
                     {{ form_row(form.personne.profession) }}
                     {{ form_row(form.email) }}
-                </div>
-                <div class="col-md-6">
                     {{ form_row(form.personne.avatar) }}
                     {{ form_row(form.etat) }}
                     {{ form_row(form.isVerified) }}
+                </div>
+                <div class="col-md-6">
+                    {{ form_row(form.personne.adresse.numero_villa) }}
+                    {{ form_row(form.personne.adresse.quartier) }}
+                    {{ form_row(form.personne.adresse.rue) }}
+                    {{ form_row(form.personne.adresse.pays) }}
+                    {{ form_row(form.personne.adresse.ville) }}
+                   
                 </div>
             </div>
             <div class="row">
@@ -89,16 +53,7 @@
             <div class="card card-outline card-success">
                 <div class="card-header">
                     <h5>
-                        En Fonction Depuis Le : 
-                                                                                                                                                                                                                                                                     
-                                                                                                                                                                                                                                                                    
-                                                                                                                                                                                                                                                
-                                                                                                                                                                                                                        
-                                                                                                                                                                                                
-                                                                                                                                                                        
-                                                                                                                                                
-                                                                                                                        
-                                                                                                
+                        En Fonction Depuis Le :                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
                                                                         
                                                 
                         {{ date_entre_fonct ? date_entre_fonct|date_format_fr:'' }}
@@ -108,19 +63,6 @@
                     <div>
                         <h5>
                             Entrée en Fonction le : 
-                                                                                                                                                                                                                                                                                                                                                                                                                                    
-                                                                                                                                                                                                                                                                                                                                                                                                    
-                                                                                                                                                                                                                                                                                                                                                                            
-                                                                                                                                                                                                                                                                                                                                                
-                                                                                                                                                                                                                                                                                                                    
-                                                                                                                                                                                                                                                                                        
-                                                                                                                                                                                                                                                            
-                                                                                                                                                                                                                                
-                                                                                                                                                                                                    
-                                                                                                                                                                        
-                                                                                                                                            
-                                                                                                                
-                                                                                    
                                                         
                             <span style="color:#1109FF;text-transform:capitalize">
                                 {{ date_entre_fonct ? date_entre_fonct|date_format_fr:'' }}
@@ -129,9 +71,7 @@
                     </div>
                     <div class="">
                         <h5>
-                            Date Sortie En  Fonction :                                                                                               
-                                                                                                                                            
-                                                                                                                
+                            Date Sortie En  Fonction :                                                                                                                         
                                                                                     
                                                         
                             {% if date_sortie_fonct| length != 0 %}
@@ -140,9 +80,7 @@
                                 </span>
                             {% else %}
                                 <span style="color:#1109FF;text-transform:capitalize">
-                                    Toujours En Fonction                                     
-                                                                                                                                                                                
-                                                                                                                                            
+                                    Toujours En Fonction                                                                   
                                                                                                         
                                                                     
                                 </span>
@@ -154,10 +92,9 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <h4>
-                                    modifier Date entree fonction ?                                             
-                                                                                                                        
-                                                                                            
-                                                                
+                                    modifier Date entree fonction ?                                                                               
+                                                                                                        
+                                                                    
                                 </h4>
                                 {{ form_start(formChoix_1) }}
                                 {{ form_row(formChoix_1.Options) }}
@@ -174,24 +111,24 @@
                                 </div>
                             </div>
                             <div class="col-md-6">
-                            <h4>
-                                modifier Date Sortie fonction ?                                             
-                                                                                    
-                                                        
-                            </h4>
-                            {{ form_start(formChoix_3) }}
-                            {{ form_row(formChoix_3.Options) }}
-                            {{ form_end(formChoix_3) }}
-    
-                            <div id="showDateSortieFonction">
-                                {{ form_start(formDateSortieFonction) }}
-                                {{ form_row(formDateSortieFonction.date_sortie_fonction) }}
-                                <div class="btn-group">
-                                    {{ links.back(path('admin_responsable_departement_index')) }}
-                                    {{ buttons.edit() }}
+                                <h4>
+                                    modifier Date Sortie fonction ?                                                                                  
+                                                                                                        
+                                                                    
+                                </h4>
+                                {{ form_start(formChoix_3) }}
+                                {{ form_row(formChoix_3.Options) }}
+                                {{ form_end(formChoix_3) }}
+
+                                <div id="showDateSortieFonction">
+                                    {{ form_start(formDateSortieFonction) }}
+                                    {{ form_row(formDateSortieFonction.date_sortie_fonction) }}
+                                    <div class="btn-group">
+                                        {{ links.back(path('admin_responsable_departement_index')) }}
+                                        {{ buttons.edit() }}
+                                    </div>
+                                    {{ form_end(formDateSortieFonction) }}
                                 </div>
-                                {{ form_end(formDateSortieFonction) }}
-                            </div>
                             </div>
                         </div>
 
@@ -202,15 +139,7 @@
                 <div class="card card-outline card-success">
                     <div class="card-header">
                         <h5>
-                            Departement En Charge :   
-                                                                                                                                                                                                                                                                                                                                           
-                                                                                                                                                                                                                                                                                                                    
-                                                                                                                                                                                                                                                                                        
-                                                                                                                                                                                                                                                            
-                                                                                                                                                                                                                                
-                                                                                                                                                                                                    
-                                                                                                                                                                        
-                                                                                                                                            
+                            Departement En Charge :                               
                                                                                                                 
                                                                                     
                                                         
@@ -220,14 +149,7 @@
                     <div class="card-body">
                         <div>
                             <h5>
-                                Dirige le departement : 
-                                                                                                                                                                                                                                                                                                                                                          
-                                                                                                                                                                                                                                                                                                                                
-                                                                                                                                                                                                                                                                                                
-                                                                                                                                                                                                                                                                
-                                                                                                                                                                                                                                
-                                                                                                                                                                                                
-                                                                                                                                                                
+                                Dirige le departement :                                 
                                                                                                                                 
                                                                                                 
                                                                 
@@ -238,21 +160,7 @@
                         </div>
                         <br>
                             <h3>
-                                Changez de departement au responsable ?
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
-                                                                                                                                                                                                                                                                                                                                                                                                                                                            
-                                                                                                                                                                                                                                                                                                                                                                                                                                    
-                                                                                                                                                                                                                                                                                                                                                                                                            
-                                                                                                                                                                                                                                                                                                                                                                                    
-                                                                                                                                                                                                                                                                                                                                                        
-                                                                                                                                                                                                                                                                                                                            
-                                                                                                                                                                                                                                                                                            
-                                                                                                                                                                                                                                                            
-                                                                                                                                                                                                                            
-                                                                                                                                                                                            
-                                                                                                                                                            
-                                                                                                                            
+                                Changez de departement au responsable ?                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
                                                                                             
                                                             
                             </h3>
@@ -278,44 +186,13 @@
                 <div class="col-md-6">
                     <div class="card card-outline card-success">
                         <div class="card-header">
-                            Securite du compte    
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
-                                                                                                                                                                                                                                                                                                                                                                                                                                            
-                                                                                                                                                                                                                                                                                                                                                                                                                    
-                                                                                                                                                                                                                                                                                                                                                                                                
-                                                                                                                                                                                                                                                                                                                                                                            
-                                                                                                                                                                                                                                                                                                                                                        
-                                                                                                                                                                                                                                                                                                                                    
-                                                                                                                                                                                                                                                                                                            
-                                                                                                                                                                                                                                                                                    
-                                                                                                                                                                                                                                                        
-                                                                                                                                                                                                                            
-                                                                                                                                                                                                
-                                                                                                                                                                    
-                                                                                                                                        
-                                                                                                            
+                            Securite du compte             
                                                                                 
                                                     
                         </div>
                         <div class="card-body">
                             <h3>
-                                Voulez-vous modifier le mot de passe ?
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
-                                                                                                                                                                                                                                                                                                                                                                                                                                                            
-                                                                                                                                                                                                                                                                                                                                                                                                                                    
-                                                                                                                                                                                                                                                                                                                                                                                                            
-                                                                                                                                                                                                                                                                                                                                                                                    
-                                                                                                                                                                                                                                                                                                                                                        
-                                                                                                                                                                                                                                                                                                                            
-                                                                                                                                                                                                                                                                                            
-                                                                                                                                                                                                                                                            
-                                                                                                                                                                                                                            
-                                                                                                                                                                                            
-                                                                                                                                                            
-                                                                                                                            
+                                Voulez-vous modifier le mot de passe ?                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
                                                                                             
                                                             
                             </h3>
@@ -338,24 +215,7 @@
                 <div class="col-md-6">
                     <div class="card card-outline card-success">
                         <div class="card-header">
-                            A completer       
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
-                                                                                                                                                                                                                                                                                                                                                                                                                                                
-                                                                                                                                                                                                                                                                                                                                                                                                                    
-                                                                                                                                                                                                                                                                                                                                                                                                
-                                                                                                                                                                                                                                                                                                                                                                            
-                                                                                                                                                                                                                                                                                                                                                        
-                                                                                                                                                                                                                                                                                                                                    
-                                                                                                                                                                                                                                                                                                            
-                                                                                                                                                                                                                                                                                    
-                                                                                                                                                                                                                                                        
-                                                                                                                                                                                                                            
-                                                                                                                                                                                                
-                                                                                                                                                                    
-                                                                                                                                        
-                                                                                                            
+                            A completer                                
                                                                                 
                                                     
                         </div>

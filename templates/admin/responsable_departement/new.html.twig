@@ -1,21 +1,46 @@
 {% extends 'admin/base.html.twig' %}
-
+{% import "macros/links.html.twig" as links %}
+{% import "macros/buttons.html.twig" as buttons %}
 {% block title %}
-    New ResponsableDepartement
-            
-        
-    
+    New ResponsableDepartement 
 {% endblock %}
-
 {% block body %}
     <div class="card card-outline card-dark">
         <div class="card-header">
             <h1>
-                Create new Responsable Departement                              
+                Create new Responsable Departement
+                        
             </h1>
         </div>
         <div class="card-body">
-            {{ include('admin/responsable_departement/_form.html.twig') }}
+            {{ form_start(form) }}
+            {# {{ include('admin/responsable_departement/_form.html.twig') }} #}
+            <div class="row">
+                <div class="col-md-6">
+                    {{ form_row(form.personne) }}
+                </div>
+                <div class="col-md-6">
+                    {{ form_row(form.email) }}
+                    {{ form_row(form.password) }}
+                    {{ form_row(form.departement) }}
+                    {{ form_row(form.date_entre_fonction) }}
+                    {{ form_row(form.date_sortie_fonction) }}
+                    {{ form_row(form.etat) }}
+                    {{ form_row(form.isVerified) }}
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4"></div>
+                <div class="col-md-4">
+                    <div class="btn-group">
+                        {{ links.back(path('admin_responsable_departement_index')) }}
+                        {{ buttons.add() }}
+                    </div>
+                </div>
+                <div class="col-md-4"></div>
+            </div>
+            {{ form_end(form) }}
         </div>
     </div>
 {% endblock %}
