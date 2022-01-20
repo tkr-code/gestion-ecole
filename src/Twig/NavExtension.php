@@ -52,8 +52,12 @@ class NavExtension extends AbstractExtension
                         ]
                 ],
             ],
-            'user'=>
-            [
+            'user'=> [],
+            'professeur'=> [
+                [
+                    'name'=>'Classe',
+                    'path'=>'professeur_classe'
+                ]
             ],
             'admin'=>
             [
@@ -97,6 +101,19 @@ class NavExtension extends AbstractExtension
                         [
                             'name' => 'New',
                             'path' => 'admin_matiere_new'
+                        ]
+                    ]
+                ],
+                [
+                    "name" => 'Note',
+                    'links' => [
+                        [
+                            'name' => 'Notes',
+                            'path' => 'admin_note_index'
+                        ],
+                        [
+                            'name' => 'New',
+                            'path' => 'admin_note_new'
                         ]
                     ]
                 ],

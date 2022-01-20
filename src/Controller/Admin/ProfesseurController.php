@@ -2,8 +2,10 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Matiere;
 use App\Entity\Professeur;
 use App\Entity\User;
+use App\Form\ProfesseurEditType;
 use App\Form\ProfesseurType;
 use App\Form\UserType;
 use App\Repository\ProfesseurRepository;
@@ -11,6 +13,7 @@ use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -25,7 +28,7 @@ class ProfesseurController extends AbstractController
     public function index(ProfesseurRepository $professeurRepository, UserRepository $userRepository): Response
     {
         return $this->render('admin/professeur/index.html.twig', [
-            'professeurs' =>$userRepository->professeurs(),
+            'professeurs' =>$professeurRepository->findAll(),
             'parent_page'=>$this->parent_page
         ]);
     }
@@ -33,7 +36,7 @@ class ProfesseurController extends AbstractController
     /**
      * @Route("/new", name="admin_professeur_new", methods={"GET","POST"})
      */
-    public function new(Request $request): Response
+    public function new(Request $request,UserPasswordHasherInterface $userPasswordHasherInterface): Response
     {
         $user = new User();
         $form = $this->createForm(ProfesseurType::class, $user);
@@ -42,8 +45,13 @@ class ProfesseurController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $user->setRoles(['ROLE_PROFESSEUR']);
             $professeur = new Professeur();
+            $matieres = $form->get('matieres')->getData();
+            foreach ($matieres as $key => $value) {
+                $professeur->addMatiere($value);
+            }
             $professeur->setTitre($form->get('titre')->getData());
             $user->setProfesseur($professeur);
+            $user->setPassword($userPasswordHasherInterface->hashPassword($user,$user->getPassword()));
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
             $entityManager->flush();
@@ -73,9 +81,9 @@ class ProfesseurController extends AbstractController
     /**
      * @Route("/{id}/edit", name="admin_professeur_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request, User $user): Response
+    public function edit(Request $request, Professeur $professeur): Response
     {
-        $form = $this->createForm(ProfesseurType::class, $user);
+        $form = $this->createForm(ProfesseurEditType::class, $professeur);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -83,9 +91,9 @@ class ProfesseurController extends AbstractController
 
             return $this->redirectToRoute('admin_professeur_index', [], Response::HTTP_SEE_OTHER);
         }
-
+        // dd($user);
         return $this->renderForm('admin/professeur/edit.html.twig', [
-            'professeur' => $user,
+            'professeur' => $professeur,
             'form' => $form,
             'parent_page'=>$this->parent_page
         ]);

@@ -31,30 +31,34 @@
         <h3>Professeurs</h3>
     </div>
     <div class="card-body">
-        <div class="btn-group">
+        <div class="btn-group mb-3">
             {{ links.new(path('admin_professeur_new')) }}
         </div>
         <table class="table" id="table-1">
             <thead>
                 <tr>
                     <th>Professeur</th>                    
-                    <th>Matières</th>                    
+                    <th>Titre</th>                    
+                    <th>Matières</th>
+                    <th>Etat</th>                    
                     <th>actions</th>
                 </tr>
             </thead>
             <tbody>
-                {% for user in professeurs %}
+                {% for item in professeurs %}
                 <tr>
-                    <td>{{ user.personne.fullName }} - {{ user.professeur.titre }}</td>
+                    <td>{{ item.user.personne.fullName }}</td>
+                    <td>{{ item.titre|upper }}</td>
                     <td>
-                        {% for item in user.professeur.matieres %}
+                        {% for item in item.matieres %}
                             {{ item.designation }}
                         {% endfor %}
                     </td>
+                    <td>{{ item.user.etat }}</td>
                     <td>
                         <div class="btn-group">
-                            {{ links.show(path('admin_professeur_show', {'id': user.id}))}}
-                            {{ links.edit(path('admin_professeur_edit', {'id': user.id}))}}
+                            {{ links.show(path('admin_professeur_show', {'id': item.user.id}))}}
+                            {{ links.edit(path('admin_professeur_edit', {'id': item.id}))}}
                         </div>
                     </td>
                 </tr>

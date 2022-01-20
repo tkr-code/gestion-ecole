@@ -72,9 +72,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $responsable;
 
     /**
-     * @ORM\OneToOne(targetEntity=Professeur::class, cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity=Professeur::class, inversedBy="user", cascade={"persist", "remove"})
      */
     private $professeur;
+
 
     public function __construct()
     {
@@ -252,4 +253,5 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+
 }

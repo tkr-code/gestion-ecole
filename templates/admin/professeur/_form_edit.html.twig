@@ -2,40 +2,38 @@
 {{ form_start(form) }}
 <div class="row">
     <div class="col-md-6 col-12">
-        {{ form_row(form.personne.nom) }}
+        {{ form_row(form.user.personne.nom) }}
     </div>
     <div class="col-md-6 col-12">
-        {{ form_row(form.personne.prenom)}}
+        {{ form_row(form.user.personne.prenom)}}
     </div>
     <div class="col-md-6 col-12">
-        {{ form_row(form.email)}}
+        {{ form_row(form.user.email)}}
     </div>
     <div class="col-md-6 col-12">
-        {{ form_row(form.password)}}
-    </div>
-    <div class="col-md-6 col-12">
-        {{ form_row(form.personne.profession)}}
+        {{ form_row(form.user.personne.profession)}}
     </div>
     <div class="col-md-6 col-12">
         {{ form_row(form.titre)}}
     </div>
-    <div class="col-md-12 col-12">
+    <div class="col-md-6 col-12">
         {{ form_row(form.matieres)}}
     </div>
     <div class="col-md-6 col-12">
-        {{ form_row(form.personne.avatar)}}
+        {{ form_row(form.user.personne.avatar)}}
     </div>
     <div class="col-md-6 col-12">
-        {{ form_row(form.etat)}}
+        {{ form_row(form.user.etat)}}
     </div>
     <div class="col-md-12 col-12">
-        {{ form_row(form.isVerified)}}
+        {{ form_row(form.user.isVerified)}}
     </div>
     
 
     {{ form_widget(form) }}
         <div class="btn-group">
             {{ links.back(path('admin_professeur_index')) }}
+            {# {{ buttons.add() }} #}
             <button class="btn btn-primary">{{ button_label|default('Save') }}</button>
         </div>
 </div>

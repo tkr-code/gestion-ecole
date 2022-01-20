@@ -30,8 +30,11 @@
             <a class="btn btn-dark" href="{{ path('user_index') }}">back to user list</a>
             <a class="btn btn-success" href="{{ path('user_edit', {'id': user.id}) }}">edit</a>
             {% endif %}
+            {% if app.request.attributes.get('_route') == 'admin_professeur_show' %}
+
             <a class="btn btn-dark" href="{{ path('admin_professeur_index') }}">back to list</a>
             <a class="btn btn-primary" href="{{ path('admin_professeur_edit', {'id': user.professeur.id}) }}">edit Professeur</a>
+            {% endif %}
         </div>
     </div>
     <!-- /.card-body -->

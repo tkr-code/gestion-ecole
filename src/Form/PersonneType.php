@@ -22,6 +22,7 @@ class PersonneType extends AbstractType
                 ]
             ])
             ->add('prenom',TextType::class,[
+                'label'=>'Prénom',
                 'attr'=>[
                     'placeholder'=>'Prénom',
                     'class'=>'text-capitalize'

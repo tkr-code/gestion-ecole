@@ -18,8 +18,11 @@ class LoginRolesSuscriberSubscriber implements EventSubscriberInterface
     public function onLoginSuccessEvent(LoginSuccessEvent $event)
     {
         $user  = $event->getUser();
-        if(in_array('ROLE_CLIENT', $user->getRoles())){
-            $event->setResponse(new RedirectResponse($this->urlGenerator->generate('client_index')));
+
+        if(in_array('ROLE_ADMIN', $user->getRoles())){
+            $event->setResponse(new RedirectResponse($this->urlGenerator->generate('admin')));
+        }else if(in_array('ROLE_PROFESSEUR', $user->getRoles())){
+            $event->setResponse(new RedirectResponse($this->urlGenerator->generate('professeur_index')));
         }
     }
 

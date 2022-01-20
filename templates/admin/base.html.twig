@@ -225,6 +225,9 @@
             {{ nav.list(navs.getNavs.dashboard,'',parent_page|default('')) }}
             {{ nav.list(navs.getNavs.user,'',parent_page|default('')) }}
 
+            {% if is_granted('ROLE_PROFESSEUR') %}
+              {{ nav.list(navs.getNavs.professeur,'Professeur',parent_page|default('')) }}
+            {% endif %}
             {% if is_granted('ROLE_ADMIN') %}
               {{ nav.list(navs.getNavs.admin,'Admin',parent_page|default('')) }}
             {% endif %}

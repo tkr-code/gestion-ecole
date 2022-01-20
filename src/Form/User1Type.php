@@ -14,7 +14,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\File;
 
-class UserType extends AbstractType
+class User1Type extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -26,19 +26,7 @@ class UserType extends AbstractType
                 'attr'=>[
                     'placeholder'=>'Email',
                 ]
-            ])
-            ->add('roles',ChoiceType::class,[
-                'choices'=>$this->roles(),
-                'multiple'=>true,
-                'attr'=>[
-                    'class'=>'select2'
-                ]
-            ])
-            ->add('password',PasswordType::class,[
-                'attr'=>[
-                    'placeholder'=>'Mot de passe'
-                ]
-            ])
+            ])            
             ->add('etat',ChoiceType::class,[
                 'choices'=>$this->etats()
             ])

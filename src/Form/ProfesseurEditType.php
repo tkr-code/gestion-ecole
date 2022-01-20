@@ -16,24 +16,18 @@ use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Validator\Constraints\File;
-class ProfesseurType extends AbstractType
+class ProfesseurEditType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('personne',PersonneType::class,[
+            ->add('user',User1Type::class,[
                 'label'=>false
-                ])
-            ->add('email',EmailType::class,[
-                'attr'=>[
-                    'placeholder'=>'Email',
-                ]
             ])
             ->add('titre',TextType::class,[
                 'attr'=>[
                     'placeholder'=>'Titre'
                 ],
-                'mapped'=>false
             ])
             ->add('matieres',EntityType::class,[
                 'class'=>Matiere::class,
@@ -41,15 +35,6 @@ class ProfesseurType extends AbstractType
                 'multiple'=>true,
                 'mapped'=>false
             ])
-            ->add('password',PasswordType::class,[
-                'attr'=>[
-                    'placeholder'=>'Mot de passe'
-                ]
-            ])
-            ->add('etat',ChoiceType::class,[
-                'choices'=>$this->etats()
-            ])
-            ->add('isVerified')
         ;
     }
     public function etats(){
@@ -70,7 +55,7 @@ class ProfesseurType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => User::class,
+            'data_class' => Professeur::class,
         ]);
     }
 }
